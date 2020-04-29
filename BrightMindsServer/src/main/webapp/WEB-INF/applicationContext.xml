@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This XML file serves as our ApplicationContext. It is here that we will 
+	define our Spring Beans and wire them together. We will also configure any 
+	Spring modules we're using here. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- This tag tells the framework that we want to use an annotation-driven 
+		approach to declaring our components. -->
+	<context:annotation-config></context:annotation-config>
+
+	<!-- This enables the use of the AspectJ style of Spring AOP. AspectJ, as 
+		a style of AOP, allows us to modularize our cross-cutting concerns, which 
+		are concerns that cut across several layers of an application. -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<!-- In order to configure our Spring ORM integration and allow the framework 
+		to manage our Hibernate transactions, we must include three new beans in 
+		our IOC container: *dataSource *sessionFactory *transactionManager -->
+
+	<context:property-placeholder
+		location="classpath:application.properties" />
+
+	<bean name="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="org.postgresql.Driver"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+
+	<bean name="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<!--  <value>com.revature.model.Polkaman</value>
+				<value>com.revature.model.Polkatype</value>
+				<value>com.revature.model.Polkaowner</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- Transaction Manager This makes all sessions Spring-managed transactions. -->
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Tell the framework which packages to scan for those annotations. -->
+	<context:component-scan
+		base-package="com.brightminds.aspect;com.brightminds.util;com.brightminds.repository;com.brightminds.service;com.brightminds.controller"></context:component-scan>
+
+	<!-- Let's a define a bean that we want Spring to manage the life cycle 
+		of! This is how we define a bean. We give the bean a logical name and supply 
+		the fully qualified class name of that bean. NOTE: Spring beans can have 
+		several scopes. These scopes include: singleton, prototype, session, and 
+		request. The singleton scope is the default scope. Using this scope, Spring 
+		will only return one shared instance of that bean when the getBean() method 
+		is called! The prototype scope, on the other hand, will return a new instance 
+		of the bean with every call to getBean(). The session and request scopes 
+		are used in web environments. -->
+	<!-- <bean name="polkamanRepository" class="com.revature.repository.PolkamanRepositoryImpl" 
+		scope="singleton"></bean> -->
+
+	<!-- Manual Bean Wiring: If we want to create connections between our beans, 
+		we have to "wire" them together. In other words, we're creating relationships 
+		between our beans. There are three ways to wire beans together: Setter injection, 
+		constructor injection, and field injection. Setter injection entails injecting 
+		a bean via another bean's setter. Constructor injection entails injecting 
+		a bean via another bean's constructor. Field injection is entails injecting 
+		a bean directly into another bean's field! -->
+	
+	<!-- <bean name="polkamanService"
+		class="com.revature.service.PolkamanService">
+		<property name="polkamanRepository" ref="polkamanRepository"></property>
+	</bean> -->
+
+	<!-- Autowiring Beans When we autowire beans, we don't have to define beans 
+		ourselves and then explicitly wire them into other beans. We can instead 
+		simply define our beans and then tell the framework to wire them in for us 
+		as needed. We can tell the framework to autowire these in: byType, byName, 
+		or constructor. byName: The framework looks for a property with the given 
+		bean name in the current container. byType: The framework looks for a property 
+		with the given bean type in the current container. Note that if there are 
+		two beans with the same the type, it won't work! Constructor: The framework 
+		looks for an argument of the given type in the constructor. Again, if there 
+		are two beans with the same type in the constructor, it won't work! -->
+	<!-- This is a bean that will be autowired in by type! -->
+	<!-- <bean name="polkamanRepository"
+		class="com.revature.repository.PolkamanRepositoryImpl"
+		autowire="byName"></bean> -->
+</beans>
