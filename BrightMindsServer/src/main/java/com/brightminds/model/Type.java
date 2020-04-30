@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 
 @Table(name = "types")
-public class Types {
+public class Type {
 	
 	@Id
 	@GeneratedValue(generator ="type_id_seq_", strategy = GenerationType.AUTO)
@@ -30,10 +30,10 @@ public class Types {
 	private Date UpdatedAt;
 	
 	
-	public Types() {
+	public Type() {
 		super();
 	}
-	public Types(int typeId, String type, int status, Date createdAt, Date updatedAt) {
+	public Type(int typeId, String type, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.typeId = typeId;
 		this.type = type;
@@ -90,7 +90,7 @@ public class Types {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Types other = (Types) obj;
+		Type other = (Type) obj;
 		if (CreatedAt == null) {
 			if (other.CreatedAt != null)
 				return false;
