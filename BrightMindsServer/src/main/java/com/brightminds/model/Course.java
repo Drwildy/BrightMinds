@@ -14,14 +14,14 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "courses")
+@Table(name = "course")
 public class Course {
 	
 	@Id
 	@GeneratedValue(generator ="course_id_seq_", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="course_id_seq", allocationSize=1)
 	@Column
-	private int courseId;
+	private int id;
 	@OneToOne
 	@JoinColumn(name ="instructor_id")
 	private int instructorId;
@@ -46,7 +46,7 @@ public class Course {
 	public Course(int courseId, int instructorId, String firstName, String lastName, String phoneNumber, String address,
 			String degree, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.courseId = courseId;
+		this.id = courseId;
 		this.instructorId = instructorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -58,10 +58,10 @@ public class Course {
 		UpdatedAt = updatedAt;
 	}
 	public int getCourseId() {
-		return courseId;
+		return id;
 	}
 	public void setCourseId(int courseId) {
-		this.courseId = courseId;
+		this.id = courseId;
 	}
 	public int getInstructorId() {
 		return instructorId;
@@ -124,7 +124,7 @@ public class Course {
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + courseId;
+		result = prime * result + id;
 		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + instructorId;
@@ -157,7 +157,7 @@ public class Course {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (courseId != other.courseId)
+		if (id != other.id)
 			return false;
 		if (degree == null) {
 			if (other.degree != null)
@@ -187,7 +187,7 @@ public class Course {
 	}
 	@Override
 	public String toString() {
-		return "Course [courseId=" + courseId + ", instructorId=" + instructorId + ", firstName=" + firstName
+		return "Course [courseId=" + id + ", instructorId=" + instructorId + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", address=" + address + ", degree="
 				+ degree + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
 	}

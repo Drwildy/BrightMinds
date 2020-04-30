@@ -12,14 +12,14 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "types")
+@Table(name = "type")
 public class Type {
 	
 	@Id
 	@GeneratedValue(generator ="type_id_seq_", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="type_id_seq", allocationSize=1)
 	@Column
-	private int typeId;
+	private int id;
 	@Column
 	private String type;
 	@Column
@@ -35,17 +35,17 @@ public class Type {
 	}
 	public Type(int typeId, String type, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.typeId = typeId;
+		this.id = typeId;
 		this.type = type;
 		this.status = status;
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
 	}
 	public int getTypeId() {
-		return typeId;
+		return id;
 	}
 	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+		this.id = typeId;
 	}
 	public String getType() {
 		return type;
@@ -79,7 +79,7 @@ public class Type {
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
 		result = prime * result + status;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + typeId;
+		result = prime * result + id;
 		return result;
 	}
 	@Override
@@ -108,13 +108,13 @@ public class Type {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (typeId != other.typeId)
+		if (id != other.id)
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Types [typeId=" + typeId + ", type=" + type + ", status=" + status + ", CreatedAt=" + CreatedAt
+		return "Types [typeId=" + id + ", type=" + type + ", status=" + status + ", CreatedAt=" + CreatedAt
 				+ ", UpdatedAt=" + UpdatedAt + "]";
 	}
 	

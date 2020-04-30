@@ -12,12 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "instructors")
-public class Instructors {
+@Table(name = "student")
+public class Student {
 
 	@Id
-	@GeneratedValue(generator = "instructor_id_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "instructor_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "student_id_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "student_id_seq", allocationSize = 1)
 	@Column
 	private int id;
 	@Column
@@ -33,21 +33,19 @@ public class Instructors {
 	@Column
 	private Date dateOfBirth;
 	@Column
-	private String degree;
-	@Column
 	private int status;
 	@Column
 	private Date createdAt;
 	@Column
 	private Date updatedAt;
 
-	public Instructors() {
+	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Instructors(int id, int userid, String firstName, String lastName, String phoneNumber, String address,
-			Date dateOfBirth, String degree, int status, Date createdAt, Date updatedAt) {
+	public Student(int id, int userid, String firstName, String lastName, String phoneNumber, String address,
+			Date dateOfBirth, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.userid = userid;
@@ -56,7 +54,6 @@ public class Instructors {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.dateOfBirth = dateOfBirth;
-		this.degree = degree;
 		this.status = status;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -118,14 +115,6 @@ public class Instructors {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getDegree() {
-		return degree;
-	}
-
-	public void setDegree(String degree) {
-		this.degree = degree;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -157,7 +146,6 @@ public class Instructors {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
-		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -176,7 +164,7 @@ public class Instructors {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Instructors other = (Instructors) obj;
+		Student other = (Student) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -191,11 +179,6 @@ public class Instructors {
 			if (other.dateOfBirth != null)
 				return false;
 		} else if (!dateOfBirth.equals(other.dateOfBirth))
-			return false;
-		if (degree == null) {
-			if (other.degree != null)
-				return false;
-		} else if (!degree.equals(other.degree))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -228,9 +211,9 @@ public class Instructors {
 
 	@Override
 	public String toString() {
-		return "Instructors [id=" + id + ", userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", degree="
-				+ degree + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Students [id=" + id + ", userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", status="
+				+ status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 }

@@ -14,13 +14,13 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name="Lessons")
-public class Lessons {
+@Table(name="Lesson")
+public class Lesson {
 	@Id
 	@GeneratedValue(generator="lesson_id_seq", strategy=GenerationType.AUTO)
 	@SequenceGenerator(name="lesson_id_seq", allocationSize=1)
 	@Column
-	private int lessonId;
+	private int id;
 	//JOIN TABLE DEFINITION
 //	@JoinTable(name="lessons_students", 
 //	 joinColumns = {@JoinColumn(name="lesson_lessonId")}, 
@@ -28,7 +28,7 @@ public class Lessons {
 //	@JoinColumn
 //	private Set<Students> Students; //default is lazy loading as it's a collection!
 	@ManyToOne
-	private Units unitId;
+	private Unit unitId;
 	@Column
 	private int lessonNumber;
 	@Column
@@ -42,14 +42,14 @@ public class Lessons {
 	@Column
 	private Date updatedAt;
 	
-	public Lessons() {
+	public Lesson() {
 		super();
 	}
 
-	public Lessons(int lessonId, Units unitId, int lessonNumber, String lessonName, String lessonUrl, int status,
+	public Lesson(int lessonId, Unit unitId, int lessonNumber, String lessonName, String lessonUrl, int status,
 			Date createdAt, Date updatedAt) {
 		super();
-		this.lessonId = lessonId;
+		this.id = lessonId;
 		this.unitId = unitId;
 		this.lessonNumber = lessonNumber;
 		this.lessonName = lessonName;
@@ -60,18 +60,18 @@ public class Lessons {
 	}
 
 	public int getLessonId() {
-		return lessonId;
+		return id;
 	}
 
 	public void setLessonId(int lessonId) {
-		this.lessonId = lessonId;
+		this.id = lessonId;
 	}
 
-	public Units getUnitId() {
+	public Unit getUnitId() {
 		return unitId;
 	}
 
-	public void setUnitId(Units unitId) {
+	public void setUnitId(Unit unitId) {
 		this.unitId = unitId;
 	}
 
@@ -128,7 +128,7 @@ public class Lessons {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-		result = prime * result + lessonId;
+		result = prime * result + id;
 		result = prime * result + ((lessonName == null) ? 0 : lessonName.hashCode());
 		result = prime * result + lessonNumber;
 		result = prime * result + ((lessonUrl == null) ? 0 : lessonUrl.hashCode());
@@ -146,13 +146,13 @@ public class Lessons {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lessons other = (Lessons) obj;
+		Lesson other = (Lesson) obj;
 		if (createdAt == null) {
 			if (other.createdAt != null)
 				return false;
 		} else if (!createdAt.equals(other.createdAt))
 			return false;
-		if (lessonId != other.lessonId)
+		if (id != other.id)
 			return false;
 		if (lessonName == null) {
 			if (other.lessonName != null)
@@ -183,7 +183,7 @@ public class Lessons {
 
 	@Override
 	public String toString() {
-		return "Lessons [lessonId=" + lessonId + ", unitId=" + unitId + ", lessonNumber=" + lessonNumber
+		return "Lessons [lessonId=" + id + ", unitId=" + unitId + ", lessonNumber=" + lessonNumber
 				+ ", lessonName=" + lessonName + ", lessonUrl=" + lessonUrl + ", status=" + status + ", createdAt="
 				+ createdAt + ", updatedAt=" + updatedAt + "]";
 	}
