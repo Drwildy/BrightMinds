@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.brightminds.model.Test;
-import com.brightminds.util.HibernateConfiguration;
+import com.revature.util.HibernateConfiguration;
 
 public class TestRepositoryImp implements TestRepository{
 

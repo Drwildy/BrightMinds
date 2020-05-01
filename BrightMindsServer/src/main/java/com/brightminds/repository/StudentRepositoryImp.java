@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.brightminds.model.Student;
-import com.brightminds.util.HibernateConfiguration;
+import com.revature.util.HibernateConfiguration;
 
 public class StudentRepositoryImp implements StudentRepository{
 
