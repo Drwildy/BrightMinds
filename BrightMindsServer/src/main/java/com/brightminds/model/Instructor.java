@@ -4,15 +4,18 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "instructors")
+@Table(name = "instructor")
 public class Instructor {
 
 	@Id
@@ -20,8 +23,9 @@ public class Instructor {
 	@SequenceGenerator(name = "instructor_id_seq", allocationSize = 1)
 	@Column
 	private int id;
-	@Column
-	private int userid;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "users_id")
+	private User userid;
 	@Column
 	private String firstName;
 	@Column
@@ -40,13 +44,12 @@ public class Instructor {
 	private Date createdAt;
 	@Column
 	private Date updatedAt;
-
+	
 	public Instructor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public Instructor(int id, int userid, String firstName, String lastName, String phoneNumber, String address,
+	
+	public Instructor(int id, User userid, String firstName, String lastName, String phoneNumber, String address,
 			Date dateOfBirth, String degree, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
@@ -61,95 +64,74 @@ public class Instructor {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getUserid() {
+	public User getUserid() {
 		return userid;
 	}
-
-	public void setUserid(int userid) {
+	public void setUserid(User userid) {
 		this.userid = userid;
 	}
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-
 	public String getDegree() {
 		return degree;
 	}
-
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
-
 	public int getStatus() {
 		return status;
 	}
-
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -164,10 +146,10 @@ public class Instructor {
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + status;
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
-		result = prime * result + userid;
+		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -221,16 +203,18 @@ public class Instructor {
 				return false;
 		} else if (!updatedAt.equals(other.updatedAt))
 			return false;
-		if (userid != other.userid)
+		if (userid == null) {
+			if (other.userid != null)
+				return false;
+		} else if (!userid.equals(other.userid))
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Instructors [id=" + id + ", userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName
+		return "Instructor [id=" + id + ", userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", dateOfBirth=" + dateOfBirth + ", degree="
 				+ degree + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-
 }

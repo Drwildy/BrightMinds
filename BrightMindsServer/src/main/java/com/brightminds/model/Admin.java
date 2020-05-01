@@ -19,13 +19,13 @@ import javax.persistence.Table;
 public class Admin {
 	
 	@Id
-	@GeneratedValue(generator ="admin_id_seq_", strategy = GenerationType.AUTO)
+	@GeneratedValue(generator ="admin_id_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="admin_id_seq", allocationSize=1)
 	@Column
 	private int id;
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private int userId;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "users_id")
+	private User userId;
 	@Column
 	private String firstName;
 	@Column
@@ -36,13 +36,13 @@ public class Admin {
 	private Date CreatedAt;
 	@Column
 	private Date UpdatedAt;
+	
 	public Admin() {
 		super();
 	}
-	public Admin(int adminId, int userId, String firstName, String lastName, int status, Date createdAt,
-			Date updatedAt) {
+	public Admin(int id, User userId, String firstName, String lastName, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.id = adminId;
+		this.id = id;
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -50,16 +50,16 @@ public class Admin {
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
 	}
-	public int getAdminId() {
+	public int getId() {
 		return id;
 	}
-	public void setAdminId(int adminId) {
-		this.id = adminId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getUserId() {
+	public User getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 	public String getFirstName() {
@@ -98,11 +98,11 @@ public class Admin {
 		int result = 1;
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + status;
-		result = prime * result + userId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 	@Override
@@ -124,12 +124,12 @@ public class Admin {
 				return false;
 		} else if (!UpdatedAt.equals(other.UpdatedAt))
 			return false;
-		if (id != other.id)
-			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id != other.id)
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -138,16 +138,17 @@ public class Admin {
 			return false;
 		if (status != other.status)
 			return false;
-		if (userId != other.userId)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
+		return "Admin [id=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
 	}
-	
-	
 	
 }

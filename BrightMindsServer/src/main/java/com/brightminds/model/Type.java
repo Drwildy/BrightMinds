@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Type {
 	
 	@Id
-	@GeneratedValue(generator ="type_id_seq_", strategy = GenerationType.AUTO)
+	@GeneratedValue(generator ="type_id_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="type_id_seq", allocationSize=1)
 	@Column
 	private int id;
@@ -29,23 +29,24 @@ public class Type {
 	@Column
 	private Date UpdatedAt;
 	
-	
 	public Type() {
 		super();
 	}
-	public Type(int typeId, String type, int status, Date createdAt, Date updatedAt) {
+	
+	public Type(int id, String type, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.id = typeId;
+		this.id = id;
 		this.type = type;
 		this.status = status;
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
 	}
-	public int getTypeId() {
+	
+	public int getId() {
 		return id;
 	}
-	public void setTypeId(int typeId) {
-		this.id = typeId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getType() {
 		return type;
@@ -71,17 +72,19 @@ public class Type {
 	public void setUpdatedAt(Date updatedAt) {
 		UpdatedAt = updatedAt;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
+		result = prime * result + id;
 		result = prime * result + status;
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + id;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -101,6 +104,8 @@ public class Type {
 				return false;
 		} else if (!UpdatedAt.equals(other.UpdatedAt))
 			return false;
+		if (id != other.id)
+			return false;
 		if (status != other.status)
 			return false;
 		if (type == null) {
@@ -108,19 +113,13 @@ public class Type {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (id != other.id)
-			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
-		return "Types [typeId=" + id + ", type=" + type + ", status=" + status + ", CreatedAt=" + CreatedAt
-				+ ", UpdatedAt=" + UpdatedAt + "]";
+		return "Type [id=" + id + ", type=" + type + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt="
+				+ UpdatedAt + "]";
 	}
-	
-	
-	
-	
-	
 	
 }

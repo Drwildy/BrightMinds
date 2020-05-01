@@ -1,12 +1,16 @@
 package com.brightminds.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -40,14 +44,22 @@ public class Test {
 	@Column
 	private Date updatedAt;
 	
+	//Student Lesson JT
+		@ManyToMany
+		@JoinTable(name = "student_test", 
+		joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
+		inverseJoinColumns= {@JoinColumn(name="test_id", referencedColumnName="id")})
+		private Set<Student> student;
+
 	public Test() {
 		super();
 	}
 
-	public Test(int testId, Course courseId, String question, String firstPossibleAnswer, String secundPossibleAnswer,
-			String thirdPossibleAnswer, String rightAnswer, int status, Date createdAt, Date updatedAt) {
+	public Test(int id, Course courseId, String question, String firstPossibleAnswer, String secundPossibleAnswer,
+			String thirdPossibleAnswer, String rightAnswer, int status, Date createdAt, Date updatedAt,
+			Set<Student> student) {
 		super();
-		this.id = testId;
+		this.id = id;
 		this.courseId = courseId;
 		Question = question;
 		this.firstPossibleAnswer = firstPossibleAnswer;
@@ -57,14 +69,15 @@ public class Test {
 		this.status = status;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.student = student;
 	}
 
-	public int getTestId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setTestId(int testId) {
-		this.id = testId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Course getCourseId() {
@@ -139,6 +152,14 @@ public class Test {
 		this.updatedAt = updatedAt;
 	}
 
+	public Set<Student> getStudent() {
+		return student;
+	}
+
+	public void setStudent(Set<Student> student) {
+		this.student = student;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -147,10 +168,11 @@ public class Test {
 		result = prime * result + ((courseId == null) ? 0 : courseId.hashCode());
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + ((firstPossibleAnswer == null) ? 0 : firstPossibleAnswer.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((rightAnswer == null) ? 0 : rightAnswer.hashCode());
 		result = prime * result + ((secundPossibleAnswer == null) ? 0 : secundPossibleAnswer.hashCode());
 		result = prime * result + status;
-		result = prime * result + id;
+		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		result = prime * result + ((thirdPossibleAnswer == null) ? 0 : thirdPossibleAnswer.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
@@ -185,6 +207,8 @@ public class Test {
 				return false;
 		} else if (!firstPossibleAnswer.equals(other.firstPossibleAnswer))
 			return false;
+		if (id != other.id)
+			return false;
 		if (rightAnswer == null) {
 			if (other.rightAnswer != null)
 				return false;
@@ -197,7 +221,10 @@ public class Test {
 			return false;
 		if (status != other.status)
 			return false;
-		if (id != other.id)
+		if (student == null) {
+			if (other.student != null)
+				return false;
+		} else if (!student.equals(other.student))
 			return false;
 		if (thirdPossibleAnswer == null) {
 			if (other.thirdPossibleAnswer != null)
@@ -214,10 +241,10 @@ public class Test {
 
 	@Override
 	public String toString() {
-		return "Tests [testId=" + id + ", courseId=" + courseId + ", Question=" + Question
-				+ ", firstPossibleAnswer=" + firstPossibleAnswer + ", secundPossibleAnswer=" + secundPossibleAnswer
-				+ ", thirdPossibleAnswer=" + thirdPossibleAnswer + ", rightAnswer=" + rightAnswer + ", status=" + status
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Test [id=" + id + ", courseId=" + courseId + ", Question=" + Question + ", firstPossibleAnswer="
+				+ firstPossibleAnswer + ", secundPossibleAnswer=" + secundPossibleAnswer + ", thirdPossibleAnswer="
+				+ thirdPossibleAnswer + ", rightAnswer=" + rightAnswer + ", status=" + status + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", student=" + student + "]";
 	}
-	
+
 }

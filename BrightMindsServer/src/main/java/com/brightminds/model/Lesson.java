@@ -2,32 +2,30 @@ package com.brightminds.model;
 
 import java.util.Date;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 
-@Table(name="Lesson")
+@Table(name="lesson")
 public class Lesson {
 	@Id
 	@GeneratedValue(generator="lesson_id_seq", strategy=GenerationType.AUTO)
 	@SequenceGenerator(name="lesson_id_seq", allocationSize=1)
 	@Column
 	private int id;
-	//JOIN TABLE DEFINITION
-//	@JoinTable(name="lessons_students", 
-//	 joinColumns = {@JoinColumn(name="lesson_lessonId")}, 
-//	 inverseJoinColumns = {@JoinColumn(name="students_studenstId")})
-//	@JoinColumn
-//	private Set<Students> Students; //default is lazy loading as it's a collection!
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name ="user_id")
 	private Unit unitId;
 	@Column
 	private int lessonNumber;
@@ -42,14 +40,20 @@ public class Lesson {
 	@Column
 	private Date updatedAt;
 	
+	@OneToOne
+	@JoinTable(name = "student_lesson", 
+	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
+	inverseJoinColumns= {@JoinColumn(name="lesson_id", referencedColumnName="id")})
+	private Student student;
+
 	public Lesson() {
 		super();
 	}
 
-	public Lesson(int lessonId, Unit unitId, int lessonNumber, String lessonName, String lessonUrl, int status,
-			Date createdAt, Date updatedAt) {
+	public Lesson(int id, Unit unitId, int lessonNumber, String lessonName, String lessonUrl, int status,
+			Date createdAt, Date updatedAt, Student student) {
 		super();
-		this.id = lessonId;
+		this.id = id;
 		this.unitId = unitId;
 		this.lessonNumber = lessonNumber;
 		this.lessonName = lessonName;
@@ -57,14 +61,15 @@ public class Lesson {
 		this.status = status;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.student = student;
 	}
 
-	public int getLessonId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setLessonId(int lessonId) {
-		this.id = lessonId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Unit getUnitId() {
@@ -123,6 +128,14 @@ public class Lesson {
 		this.updatedAt = updatedAt;
 	}
 
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -133,6 +146,7 @@ public class Lesson {
 		result = prime * result + lessonNumber;
 		result = prime * result + ((lessonUrl == null) ? 0 : lessonUrl.hashCode());
 		result = prime * result + status;
+		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		result = prime * result + ((unitId == null) ? 0 : unitId.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
@@ -168,6 +182,11 @@ public class Lesson {
 			return false;
 		if (status != other.status)
 			return false;
+		if (student == null) {
+			if (other.student != null)
+				return false;
+		} else if (!student.equals(other.student))
+			return false;
 		if (unitId == null) {
 			if (other.unitId != null)
 				return false;
@@ -183,9 +202,10 @@ public class Lesson {
 
 	@Override
 	public String toString() {
-		return "Lessons [lessonId=" + id + ", unitId=" + unitId + ", lessonNumber=" + lessonNumber
-				+ ", lessonName=" + lessonName + ", lessonUrl=" + lessonUrl + ", status=" + status + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Lesson [id=" + id + ", unitId=" + unitId + ", lessonNumber=" + lessonNumber + ", lessonName="
+				+ lessonName + ", lessonUrl=" + lessonUrl + ", status=" + status + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", student=" + student + "]";
 	}
-		
+	
+	
 }

@@ -4,16 +4,18 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "user")
-
+@Table(name = "users") //Has to be plural to avoid a reserved word conflict. It will be the ONLY model that is plural unless the same issue occurs
 public class User {
 
 	@Id
@@ -21,8 +23,9 @@ public class User {
 	@SequenceGenerator(name = "user_id_seq", allocationSize = 1)
 	@Column
 	private int id;
-	@Column
-	private int typeid;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name ="type_id")
+	private Type typeid;
 	@Column
 	private String username;
 	@Column
@@ -33,15 +36,14 @@ public class User {
 	private Date createdAt;
 	@Column
 	private Date updatedAt;
-
+	
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public User(int userid, int typeid, String username, String password, int status, Date createdAt, Date updatedAt) {
+	
+	public User(int id, Type typeid, String username, String password, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.id = userid;
+		this.id = id;
 		this.typeid = typeid;
 		this.username = username;
 		this.password = password;
@@ -50,19 +52,19 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public int getUserid() {
+	public int getId() {
 		return id;
 	}
 
-	public void setUserid(int userid) {
-		this.id = userid;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getTypeid() {
+	public Type getTypeid() {
 		return typeid;
 	}
 
-	public void setTypeid(int typeid) {
+	public void setTypeid(Type typeid) {
 		this.typeid = typeid;
 	}
 
@@ -111,11 +113,11 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + status;
-		result = prime * result + typeid;
+		result = prime * result + ((typeid == null) ? 0 : typeid.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
-		result = prime * result + id;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -134,6 +136,8 @@ public class User {
 				return false;
 		} else if (!createdAt.equals(other.createdAt))
 			return false;
+		if (id != other.id)
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -141,14 +145,15 @@ public class User {
 			return false;
 		if (status != other.status)
 			return false;
-		if (typeid != other.typeid)
+		if (typeid == null) {
+			if (other.typeid != null)
+				return false;
+		} else if (!typeid.equals(other.typeid))
 			return false;
 		if (updatedAt == null) {
 			if (other.updatedAt != null)
 				return false;
 		} else if (!updatedAt.equals(other.updatedAt))
-			return false;
-		if (id != other.id)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -160,8 +165,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Users [userid=" + id + ", typeid=" + typeid + ", username=" + username + ", password=" + password
+		return "User [id=" + id + ", typeid=" + typeid + ", username=" + username + ", password=" + password
 				+ ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-
 }
