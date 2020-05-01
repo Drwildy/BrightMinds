@@ -15,7 +15,7 @@ import org.hibernate.query.Query;
 import com.brightminds.model.Student;
 import com.brightminds.util.HibernateConfiguration;
 
-public class StrudentRepositoryImp implements StudentRepository{
+public class StudentRepositoryImp implements StudentRepository{
 
 	@Override
 	public void insert(Student a) {
