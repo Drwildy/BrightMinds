@@ -1,4 +1,4 @@
-package com.revature.util;
+package com.brightminds.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
