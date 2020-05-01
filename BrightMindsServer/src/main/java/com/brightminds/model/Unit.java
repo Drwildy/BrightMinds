@@ -13,14 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name="Units")
-public class Units {
+@Table(name="Unit")
+public class Unit {
 	
 	@Id
 	@GeneratedValue(generator = "unit_id_seq", strategy=GenerationType.AUTO)
 	@SequenceGenerator(name="unit_id_seq", allocationSize=1)
 	@Column
-	private int unitId;
+	private int id;
 	@ManyToOne
 	private int courseId;
 	@Column
@@ -34,14 +34,14 @@ public class Units {
 	@Column
 	private Date updatedAt;
 	
-	public Units() {
+	public Unit() {
 		super();
 	}
 
-	public Units(int unitId, int courseId, String unitName, int unitNumber, int status, Date createdAt,
+	public Unit(int unitId, int courseId, String unitName, int unitNumber, int status, Date createdAt,
 			Date updatedAt) {
 		super();
-		this.unitId = unitId;
+		this.id = unitId;
 		this.courseId = courseId;
 		this.unitName = unitName;
 		this.unitNumber = unitNumber;
@@ -51,11 +51,11 @@ public class Units {
 	}
 
 	public int getUnitId() {
-		return unitId;
+		return id;
 	}
 
 	public void setUnitId(int unitId) {
-		this.unitId = unitId;
+		this.id = unitId;
 	}
 
 	public int getCourseId() {
@@ -113,7 +113,7 @@ public class Units {
 		result = prime * result + courseId;
 		result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
 		result = prime * result + status;
-		result = prime * result + unitId;
+		result = prime * result + id;
 		result = prime * result + ((unitName == null) ? 0 : unitName.hashCode());
 		result = prime * result + unitNumber;
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
@@ -128,7 +128,7 @@ public class Units {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Units other = (Units) obj;
+		Unit other = (Unit) obj;
 		if (courseId != other.courseId)
 			return false;
 		if (createdAt == null) {
@@ -138,7 +138,7 @@ public class Units {
 			return false;
 		if (status != other.status)
 			return false;
-		if (unitId != other.unitId)
+		if (id != other.id)
 			return false;
 		if (unitName == null) {
 			if (other.unitName != null)
@@ -157,7 +157,7 @@ public class Units {
 
 	@Override
 	public String toString() {
-		return "Units [unitId=" + unitId + ", courseId=" + courseId + ", unitName=" + unitName + ", unitNumber="
+		return "Units [unitId=" + id + ", courseId=" + courseId + ", unitName=" + unitName + ", unitNumber="
 				+ unitNumber + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
