@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.brightminds.model.Lesson;
-import com.revature.util.HibernateConfiguration;
+import com.brightminds.util.HibernateConfiguration;
 
 public class LessonRepositoryImp implements LessonRepository{
 
