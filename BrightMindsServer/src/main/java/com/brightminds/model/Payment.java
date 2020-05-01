@@ -15,14 +15,14 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "payments")
+@Table(name = "payment")
 public class Payment {
 
 	@Id
 	@GeneratedValue(generator ="payment_id_seq_", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="payment_id_seq", allocationSize=1)
 	@Column
-	private int paymentId;
+	private int id;
 	@ManyToOne
 	@JoinColumn(name="student_id")
 	private int studentId;
@@ -42,7 +42,7 @@ public class Payment {
 
 	public Payment(int paymentId, int studentId, int courseId, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.paymentId = paymentId;
+		this.id = paymentId;
 		this.studentId = studentId;
 		this.courseId = courseId;
 		this.status = status;
@@ -51,11 +51,11 @@ public class Payment {
 	}
 
 	public int getPaymentId() {
-		return paymentId;
+		return id;
 	}
 
 	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
+		this.id = paymentId;
 	}
 
 	public int getStudentId() {
@@ -105,7 +105,7 @@ public class Payment {
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
 		result = prime * result + courseId;
-		result = prime * result + paymentId;
+		result = prime * result + id;
 		result = prime * result + status;
 		result = prime * result + studentId;
 		return result;
@@ -132,7 +132,7 @@ public class Payment {
 			return false;
 		if (courseId != other.courseId)
 			return false;
-		if (paymentId != other.paymentId)
+		if (id != other.id)
 			return false;
 		if (status != other.status)
 			return false;
@@ -143,7 +143,7 @@ public class Payment {
 
 	@Override
 	public String toString() {
-		return "Payment [paymentId=" + paymentId + ", studentId=" + studentId + ", courseId=" + courseId + ", status="
+		return "Payment [paymentId=" + id + ", studentId=" + studentId + ", courseId=" + courseId + ", status="
 				+ status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
 	}
 }

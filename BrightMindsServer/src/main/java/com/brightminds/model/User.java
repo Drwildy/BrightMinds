@@ -12,15 +12,15 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "users")
+@Table(name = "user")
 
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(generator = "user_id_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "user_id_seq", allocationSize = 1)
 	@Column
-	private int userid;
+	private int id;
 	@Column
 	private int typeid;
 	@Column
@@ -34,14 +34,14 @@ public class Users {
 	@Column
 	private Date updatedAt;
 
-	public Users() {
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Users(int userid, int typeid, String username, String password, int status, Date createdAt, Date updatedAt) {
+	public User(int userid, int typeid, String username, String password, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.userid = userid;
+		this.id = userid;
 		this.typeid = typeid;
 		this.username = username;
 		this.password = password;
@@ -51,11 +51,11 @@ public class Users {
 	}
 
 	public int getUserid() {
-		return userid;
+		return id;
 	}
 
 	public void setUserid(int userid) {
-		this.userid = userid;
+		this.id = userid;
 	}
 
 	public int getTypeid() {
@@ -115,7 +115,7 @@ public class Users {
 		result = prime * result + status;
 		result = prime * result + typeid;
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
-		result = prime * result + userid;
+		result = prime * result + id;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -128,7 +128,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		if (createdAt == null) {
 			if (other.createdAt != null)
 				return false;
@@ -148,7 +148,7 @@ public class Users {
 				return false;
 		} else if (!updatedAt.equals(other.updatedAt))
 			return false;
-		if (userid != other.userid)
+		if (id != other.id)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -160,7 +160,7 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [userid=" + userid + ", typeid=" + typeid + ", username=" + username + ", password=" + password
+		return "Users [userid=" + id + ", typeid=" + typeid + ", username=" + username + ", password=" + password
 				+ ", status=" + status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 

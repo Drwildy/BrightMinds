@@ -15,14 +15,14 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "admins")
+@Table(name = "admin")
 public class Admin {
 	
 	@Id
 	@GeneratedValue(generator ="admin_id_seq_", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name="admin_id_seq", allocationSize=1)
 	@Column
-	private int adminId;
+	private int id;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private int userId;
@@ -42,7 +42,7 @@ public class Admin {
 	public Admin(int adminId, int userId, String firstName, String lastName, int status, Date createdAt,
 			Date updatedAt) {
 		super();
-		this.adminId = adminId;
+		this.id = adminId;
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -51,10 +51,10 @@ public class Admin {
 		UpdatedAt = updatedAt;
 	}
 	public int getAdminId() {
-		return adminId;
+		return id;
 	}
 	public void setAdminId(int adminId) {
-		this.adminId = adminId;
+		this.id = adminId;
 	}
 	public int getUserId() {
 		return userId;
@@ -98,7 +98,7 @@ public class Admin {
 		int result = 1;
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
-		result = prime * result + adminId;
+		result = prime * result + id;
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + status;
@@ -124,7 +124,7 @@ public class Admin {
 				return false;
 		} else if (!UpdatedAt.equals(other.UpdatedAt))
 			return false;
-		if (adminId != other.adminId)
+		if (id != other.id)
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -144,7 +144,7 @@ public class Admin {
 	}
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
+		return "Admin [adminId=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
 	}
 	

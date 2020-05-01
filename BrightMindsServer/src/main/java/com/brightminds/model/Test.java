@@ -14,15 +14,15 @@ import javax.persistence.Table;
 @Entity
 
 @Table(name="Test")
-public class Tests {
+public class Test {
 	
 	@Id
 	@GeneratedValue(generator="test_id_seq", strategy=GenerationType.AUTO)
 	@SequenceGenerator(name="test_id_seq", allocationSize=1)
 	@Column
-	private int testId;	
+	private int id;	
 	@ManyToOne
-	private Courses courseId;
+	private Course courseId;
 	@Column
 	private String Question;
 	@Column
@@ -40,14 +40,14 @@ public class Tests {
 	@Column
 	private Date updatedAt;
 	
-	public Tests() {
+	public Test() {
 		super();
 	}
 
-	public Tests(int testId, Courses courseId, String question, String firstPossibleAnswer, String secundPossibleAnswer,
+	public Test(int testId, Course courseId, String question, String firstPossibleAnswer, String secundPossibleAnswer,
 			String thirdPossibleAnswer, String rightAnswer, int status, Date createdAt, Date updatedAt) {
 		super();
-		this.testId = testId;
+		this.id = testId;
 		this.courseId = courseId;
 		Question = question;
 		this.firstPossibleAnswer = firstPossibleAnswer;
@@ -60,18 +60,18 @@ public class Tests {
 	}
 
 	public int getTestId() {
-		return testId;
+		return id;
 	}
 
 	public void setTestId(int testId) {
-		this.testId = testId;
+		this.id = testId;
 	}
 
-	public Courses getCourseId() {
+	public Course getCourseId() {
 		return courseId;
 	}
 
-	public void setCourseId(Courses courseId) {
+	public void setCourseId(Course courseId) {
 		this.courseId = courseId;
 	}
 
@@ -150,7 +150,7 @@ public class Tests {
 		result = prime * result + ((rightAnswer == null) ? 0 : rightAnswer.hashCode());
 		result = prime * result + ((secundPossibleAnswer == null) ? 0 : secundPossibleAnswer.hashCode());
 		result = prime * result + status;
-		result = prime * result + testId;
+		result = prime * result + id;
 		result = prime * result + ((thirdPossibleAnswer == null) ? 0 : thirdPossibleAnswer.hashCode());
 		result = prime * result + ((updatedAt == null) ? 0 : updatedAt.hashCode());
 		return result;
@@ -164,7 +164,7 @@ public class Tests {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tests other = (Tests) obj;
+		Test other = (Test) obj;
 		if (Question == null) {
 			if (other.Question != null)
 				return false;
@@ -197,7 +197,7 @@ public class Tests {
 			return false;
 		if (status != other.status)
 			return false;
-		if (testId != other.testId)
+		if (id != other.id)
 			return false;
 		if (thirdPossibleAnswer == null) {
 			if (other.thirdPossibleAnswer != null)
@@ -214,7 +214,7 @@ public class Tests {
 
 	@Override
 	public String toString() {
-		return "Tests [testId=" + testId + ", courseId=" + courseId + ", Question=" + Question
+		return "Tests [testId=" + id + ", courseId=" + courseId + ", Question=" + Question
 				+ ", firstPossibleAnswer=" + firstPossibleAnswer + ", secundPossibleAnswer=" + secundPossibleAnswer
 				+ ", thirdPossibleAnswer=" + thirdPossibleAnswer + ", rightAnswer=" + rightAnswer + ", status=" + status
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
