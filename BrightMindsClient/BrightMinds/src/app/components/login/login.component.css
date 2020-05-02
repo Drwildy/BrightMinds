@@ -1,0 +1,27 @@
+h1 {
+	color:white;
+	font-weight: bold;
+}
+
+h4 {
+	color:white;
+	font-weight: lighter;
+}
+
+label {
+	color:White;
+	font-weight: lighter;
+}
+
+.skewedBox {
+	background-image: linear-gradient(to right, #DE6262, #FFB88C);
+	width: 100%;
+	padding: 200px 0;
+	transform: skew(0deg, -20deg) translateY(-180px);
+	
+}
+
+.container {
+	padding: 150px, 200px;
+	transform: skew(0deg, 20deg) translateY(180px);
+}
