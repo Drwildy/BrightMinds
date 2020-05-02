@@ -33,7 +33,7 @@
 		<property name="driverClassName"
 			value="org.postgresql.Driver"></property>
 		<property name="url" value="${url}"></property>
-		<property name="username" value="${user}"></property>
+		<property name="username" value="${username}"></property>
 		<property name="password" value="${password}"></property>
 	</bean>
 
