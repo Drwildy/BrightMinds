@@ -44,14 +44,21 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<!--  <value>com.revature.model.Polkaman</value>
-				<value>com.revature.model.Polkatype</value>
-				<value>com.revature.model.Polkaowner</value> -->
+				<value>com.brightminds.model.Type</value>
+				<value>com.brightminds.model.User</value>
+				<value>com.brightminds.model.Admin</value>
+				<value>com.brightminds.model.Instructor</value>
+				<value>com.brightminds.model.Student</value>
+				<value>com.brightminds.model.Payment</value>
+				<value>com.brightminds.model.Course</value>
+				<value>com.brightminds.model.Unit</value>
+				<value>com.brightminds.model.Lesson</value>
+				<value>com.brightminds.model.Test</value>
 			</list>
 		</property>
 	</bean>
