@@ -5,11 +5,11 @@ export class User{
     private username:string;
     private password:string;
     private status:number;
-    private createdAt:Date;
-    private updatedAt:Date;
+    private createdAt:number;
+    private updatedAt:number;
 
     constructor(id:number, typeId:number, username:string, password:string,
-        status:number, createdAt:Date, updatedAt:Date){
+        status:number, createdAt:number, updatedAt:number){
             this.id = id;
             this.typeId = typeId;
             this.username = username;
@@ -59,19 +59,19 @@ export class User{
         this.status = status;
     }
 
-    public getCreatedAt():Date{
+    public getCreatedAt():number{
         return this.createdAt;
     }
 
-    public setCreatedAt(createdAt:Date){
+    public setCreatedAt(createdAt:number){
         this.createdAt = createdAt;
     }
 
-    public getUpdatedAt():Date{
+    public getUpdatedAt():number{
         return this.updatedAt;
     }
 
-    public setUpdatedAt(updatedAt:Date){
+    public setUpdatedAt(updatedAt:number){
         this.updatedAt = updatedAt;
     }
 
