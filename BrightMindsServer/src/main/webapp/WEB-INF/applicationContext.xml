@@ -15,6 +15,7 @@
 	<!-- This tag tells the framework that we want to use an annotation-driven 
 		approach to declaring our components. -->
 	<context:annotation-config></context:annotation-config>
+	
 
 	<!-- This enables the use of the AspectJ style of Spring AOP. AspectJ, as 
 		a style of AOP, allows us to modularize our cross-cutting concerns, which 
@@ -33,7 +34,7 @@
 		<property name="driverClassName"
 			value="org.postgresql.Driver"></property>
 		<property name="url" value="${url}"></property>
-		<property name="username" value="${username}"></property>
+		<property name="username" value="${user}"></property>
 		<property name="password" value="${password}"></property>
 	</bean>
 
