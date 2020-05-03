@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Student } from 'src/app/models/Student';
+import { User } from 'src/app/models/User';
+
 
 @Component({
   selector: 'app-register',
@@ -78,8 +80,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    let student:Student = {};
-    //Do Registering stuff here
+    let createdAt = new Date().getTime();
+    let updatedAt = new Date().getTime();
+    let user = new User(0, 1, this.username, this.password, 1, createdAt, updatedAt);
+    //let student = new Student(0, 0, this.firstName, this.lastName, this.phoneNumber, this.address, this.DOB, 1, createdAt, updatedAt);
+    
+    this.registerService.register(user)
+      .subscribe(
+        result =>
+        {
+          console.log(result);
+          this.router.navigateByUrl(`/login`);
+        },
+        error =>
+        {
+          console.log(error);
+        }
+      );
   }
 
 }

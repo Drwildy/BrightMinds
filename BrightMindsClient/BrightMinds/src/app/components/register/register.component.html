@@ -32,7 +32,7 @@
                 <!--<p>Password</p>-->
                 <div class="form-group">
                     <label for="password" [ngClass]="formRegister.controls['password'].invalid ? 'text-danger' : ''">Password:</label>
-                    <input type="password" formControlName="password" class="form-control mb-4" id="defaultLoginFormPassword password" placeholder="Password" [ngClass]="formRegister.controls['password'].invalid ? 'is-invalid' : ''">
+                    <input type="password" formControlName="password" [(ngModel)]="password" class="form-control mb-4" id="defaultLoginFormPassword password" placeholder="Password" [ngClass]="formRegister.controls['password'].invalid ? 'is-invalid' : ''">
 
                     <label class="col" [ngClass]="formRegister.controls['password'].hasError('required') || formRegister.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
                     Must be at least 8 characters!
