@@ -9,20 +9,33 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.User;
 import com.brightminds.util.HibernateConfiguration;
 
+@Repository(value ="userRepository")
+@Transactional
 public class UserRepositoryImp implements UserRepository {
 
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public UserRepositoryImp(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	@Override
 	public void insert(User a) {
 		Session s = null;
 		Transaction tx = null;
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
