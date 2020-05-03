@@ -11,13 +11,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.brightminds.model.Student;
 import com.brightminds.model.User;
-import com.brightminds.util.HibernateConfiguration;
 
 @Repository(value ="userRepository")
 @Transactional
@@ -66,7 +67,7 @@ public class UserRepositoryImp implements UserRepository {
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			user = s.createNativeQuery("select * from user", User.class).list();
 			tx.commit();
@@ -81,19 +82,14 @@ public class UserRepositoryImp implements UserRepository {
 
 	@Override
 	public User getById(int id) {
-		User p = null;
+		User user = null;
 		Session s = null;
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<User> cq = cb.createQuery(User.class); 
-			Root<User> root = cq.from(User.class); 
-			cq.select(root).where(cb.equal(root.get("userId"), id));
-			Query<User> q = s.createQuery(cq);
-			p = q.getSingleResult();
+			user = (User) s.get(User.class, id);
 			tx.commit();
 		}catch(HibernateException e) {
 			tx.rollback();
@@ -102,24 +98,24 @@ public class UserRepositoryImp implements UserRepository {
 			s.close();
 		}
 		
-		return p;
+		return user;
 	}
 
 	@Override
 	public User getByName(String name) {
-		User p = null;
+		User user = null;
 		Session s = null;
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<User> cq = cb.createQuery(User.class); 
+			CriteriaQuery<User> cq = cb.createQuery(User.class);
 			Root<User> root = cq.from(User.class); 
-			cq.select(root).where(cb.equal(root.get("username"), name));
+			cq.select(root).where(cb.equal(root.get("firstName"), name));
 			Query<User> q = s.createQuery(cq);
-			p = q.getSingleResult();
+			user = q.getSingleResult();
 			tx.commit();
 		}catch(HibernateException e) {
 			tx.rollback();
@@ -128,7 +124,33 @@ public class UserRepositoryImp implements UserRepository {
 			s.close();
 		}
 		
-		return p;
+		return user;
+	}
+	
+	@Override
+	public User getByUsername(String username) {
+		User user = null;
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			CriteriaBuilder cb = s.getCriteriaBuilder(); 
+			CriteriaQuery<User> cq = cb.createQuery(User.class);
+			Root<User> root = cq.from(User.class); 
+			cq.select(root).where(cb.equal(root.get("username"), username));
+			Query<User> q = s.createQuery(cq);
+			user = q.getSingleResult();
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return user;
 	}
 
 }
