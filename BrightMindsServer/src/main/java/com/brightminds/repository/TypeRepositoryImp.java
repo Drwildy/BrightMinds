@@ -9,20 +9,33 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.Type;
 import com.brightminds.util.HibernateConfiguration;
 
+@Repository(value ="typeRepository")
+@Transactional
 public class TypeRepositoryImp implements TypeRepository{
+	
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public TypeRepositoryImp(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public void insert(Type a) {
 		Session s = null;
 		Transaction tx = null;
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
@@ -53,7 +66,7 @@ public class TypeRepositoryImp implements TypeRepository{
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			type = s.createNativeQuery("select * from type", Type.class).list();
 			tx.commit();
@@ -68,19 +81,14 @@ public class TypeRepositoryImp implements TypeRepository{
 
 	@Override
 	public Type getById(int id) {
-		Type p = null;
+		Type type = null;
 		Session s = null;
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Type> cq = cb.createQuery(Type.class); 
-			Root<Type> root = cq.from(Type.class); 
-			cq.select(root).where(cb.equal(root.get("typeId"), id));
-			Query<Type> q = s.createQuery(cq);
-			p = q.getSingleResult();
+			type = (Type) s.get(Type.class, id);
 			tx.commit();
 		}catch(HibernateException e) {
 			tx.rollback();
@@ -89,24 +97,19 @@ public class TypeRepositoryImp implements TypeRepository{
 			s.close();
 		}
 		
-		return p;
+		return type;
 	}
 
 	@Override
 	public Type getByName(String name) {
-		Type p = null;
+		Type type = null;
 		Session s = null;
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Type> cq = cb.createQuery(Type.class); 
-			Root<Type> root = cq.from(Type.class); 
-			cq.select(root).where(cb.equal(root.get("type"), name));
-			Query<Type> q = s.createQuery(cq);
-			p = q.getSingleResult();
+			type = (Type) s.get(Type.class, name);
 			tx.commit();
 		}catch(HibernateException e) {
 			tx.rollback();
@@ -115,7 +118,7 @@ public class TypeRepositoryImp implements TypeRepository{
 			s.close();
 		}
 		
-		return p;
+		return type;
 	}
 
 }

@@ -1,19 +1,20 @@
+import { User } from './User';
 
 export class Student {
 
     private id:number;
-    private userId:number;
+    private userId:User;
     private firstName:string;
     private lastName:string;
     private phoneNumber:string;
     private address:string;
-    private DOB:Date;
+    private DOB:number;
     private status:number;
-    private createdAt:Date;
-    private updatedAt:Date;
+    private createdAt:number;
+    private updatedAt:number;
 
-    constructor( id:number, userId:number, firstName:string, lastName:string, phoneNumber:string,
-        address:string, DOB:Date, status:number, createdAt:Date, UpdatedAt:Date){
+    constructor( id:number, userId:User, firstName:string, lastName:string, phoneNumber:string,
+        address:string, DOB:number, status:number, createdAt:number, UpdatedAt:number){
             this.id = id;
             this.userId = userId;
             this.firstName = firstName;
@@ -35,11 +36,11 @@ export class Student {
         this.id = id;
     }
 
-    public getUserId():number{
+    public getUserId():User{
         return this.userId;
     }
 
-    public setUserId(userId:number){
+    public setUserId(userId:User){
         this.userId = userId;
     }
 
@@ -75,11 +76,11 @@ export class Student {
         this.address = address;
     }
 
-    public getDOB():Date{
+    public getDOB():number{
         return this.DOB;
     }
 
-    public setDOB(DOB:Date){
+    public setDOB(DOB:number){
         this.DOB = DOB;
     }
 
@@ -91,19 +92,19 @@ export class Student {
         this.status = status;
     }
 
-    public getCreatedAt():Date{
+    public getCreatedAt():number{
         return this.createdAt;
     }
 
-    public setCreatedAt(createdAt:Date){
+    public setCreatedAt(createdAt:number){
         this.createdAt = createdAt;
     }
 
-    public getUpdatedAt():Date{
+    public getUpdatedAt():number{
         return this.updatedAt;
     }
 
-    public setUpdatedAt(updatedAt:Date){
+    public setUpdatedAt(updatedAt:number){
         this.updatedAt = updatedAt;
     }
 }

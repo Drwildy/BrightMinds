@@ -9,8 +9,8 @@ import com.brightminds.repository.UserRepository;
 @Service("userService")
 public class UserService {
 
-	 @Autowired
-	private UserRepository  userRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 			// used for constructor injection
 	public  UserService() {
@@ -26,6 +26,14 @@ public class UserService {
 	
 	public void insertUser(User u) {
 		this.userRepository.insert(u);
+	}
+	
+	public User getByName(String name) {
+		return this.userRepository.getByName(name);
+	}
+	
+	public User getByUsername(String username) {
+		return this.userRepository.getByUsername(username);
 	}
 
 }
