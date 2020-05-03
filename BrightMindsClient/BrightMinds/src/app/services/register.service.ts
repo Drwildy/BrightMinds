@@ -19,40 +19,33 @@ export class RegisterService {
 
   registerStudent(student: Student){
 
-    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'); //This constructs a new HTTP header
-    let body = new HttpParams()
-    .append('id', student.getId().toString())
-    .append('userId', student.getUserId().toString())
-    .append('firstName', student.getFirstName())
-    .append('lastName', student.getLastName())
-    .append('phoneNumber', student.getPhoneNumber())
-    .append('address', student.getAddress())
-    .append('DOB', student.getDOB().toString())
-    .append('status', student.getStatus().toString())
-    .append('createdAt', student.getCreatedAt().toString())
-    .append('updatedAt', student.getUpdatedAt().toString());
-    console.log(body);
+    //console.log(student);
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+      id: student.getId(),
+      userid: student.getUserId(),
+      firstName: student.getFirstName(),
+      lastName: student.getLastName(),
+      phoneNumber: student.getPhoneNumber(),
+      address: student.getAddress(),
+      dateOfBirth: student.getDOB(),
+      status: student.getStatus(),
+      createdAt: student.getCreatedAt(),
+      updatedAt: student.getUpdatedAt()
+    })   
+
+    //console.log(body);
 
     return this.http.post('http://localhost:8080/BrightMinds/student/register', body, {headers: headers});
   }
 
-  register(user: User){
-
-    console.log(user);
-    
+  //Add Observable
+  register(user: User): Observable<User>{    
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    // let body = new HttpParams()
-    // .append('id', user.getId().toString())
-    // .set('typeId', user.getTypeId().toString())
-    // .set('username', user.getUsername())
-    // .set('password', user.getPassword())
-    // .set('status', user.getStatus().toString())
-    // .set('createdAt', user.getCreatedAt().toString())
-    // .set('updatedAt', user.getUpdatedAt().toString());
-
     const body = JSON.stringify({
       id: user.getId(),
-      typeId: user.getTypeId(),
+      typeid: user.getTypeId(),
       username: user.getUsername(),
       password: user.getPassword(),
       status: user.getStatus(),
@@ -60,14 +53,8 @@ export class RegisterService {
       updatedAt: user.getUpdatedAt()
     })
 
-    console.log(body);
+    //console.log(body);
 
-    return this.http.post('http://localhost:8080/BrightMinds/user/register', body, {headers: headers});
+    return this.http.post<User>('http://localhost:8080/BrightMinds/user/register', body, {headers: headers});
   }
-
-  // register(user : User): Observable<User> {
-  //   return this.http.post<User>('http://localhost:8080/BrightMinds/user/register', user, this.httpOptions);
-  // }
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { RegisterService } from '../../services/register.service';
 import { CustomValidators } from './custom-validators';
@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Student } from 'src/app/models/Student';
+import { Type } from 'src/app/models/Type';
 import { User } from 'src/app/models/User';
 
 
@@ -80,17 +81,30 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    
+    let date = new Date(this.DOB).getTime();
     let createdAt = new Date().getTime();
     let updatedAt = new Date().getTime();
-    let user = new User(0, 1, this.username, this.password, 1, createdAt, updatedAt);
-    //let student = new Student(0, 0, this.firstName, this.lastName, this.phoneNumber, this.address, this.DOB, 1, createdAt, updatedAt);
+    let type = new Type(0, "1", 1, createdAt, updatedAt);
+    let user = new User(0, type, this.username, this.password, 1, createdAt, updatedAt);
     
     this.registerService.register(user)
       .subscribe(
         result =>
         {
-          console.log(result);
-          this.router.navigateByUrl(`/login`);
+          //console.log("This is the user result" + result);
+          let student = new Student(0, user, this.firstName, this.lastName, this.phoneNumber, this.address, date, 1, createdAt, updatedAt);
+          this.registerService.registerStudent(student).subscribe(
+            result =>
+            {
+              //console.log("This is the students result " + result)
+              this.router.navigateByUrl(`/login`);
+            },
+            error =>
+            {
+              console.log(error);
+            }
+          )
         },
         error =>
         {

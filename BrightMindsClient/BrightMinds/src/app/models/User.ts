@@ -1,17 +1,19 @@
+import { Type } from './Type';
+
 export class User{
     
     private id:number;
-    private typeId:number;
+    private typeid:Type;
     private username:string;
     private password:string;
     private status:number;
     private createdAt:number;
     private updatedAt:number;
 
-    constructor(id:number, typeId:number, username:string, password:string,
+    constructor(id:number, typeid:Type, username:string, password:string,
         status:number, createdAt:number, updatedAt:number){
             this.id = id;
-            this.typeId = typeId;
+            this.typeid = typeid;
             this.username = username;
             this.password = password;
             this.status = status;
@@ -27,12 +29,12 @@ export class User{
         this.id = id;
     }
 
-    public getTypeId():number{
-        return this.typeId;
+    public getTypeId():Type{
+        return this.typeid;
     }
 
-    public setTypeId(typeId:number){
-        this.typeId = typeId;
+    public setTypeId(typeId:Type){
+        this.typeid = typeId;
     }
 
     public getUsername():string{

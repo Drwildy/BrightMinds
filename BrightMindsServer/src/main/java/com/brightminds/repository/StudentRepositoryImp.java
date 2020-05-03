@@ -35,7 +35,7 @@ public class StudentRepositoryImp implements StudentRepository{
 		Session s = null;
 		Transaction tx = null;
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
