@@ -41,11 +41,11 @@ public class Course {
 	@Column
 	private Date UpdatedAt;
 	
-	@ManyToMany
-	@JoinTable(name = "student_course", 
-	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
-	inverseJoinColumns= {@JoinColumn(name="course_id", referencedColumnName="id")})
-	private Set<Student> student;
+//	@ManyToMany
+//	@JoinTable(name = "student_course", 
+//	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
+//	inverseJoinColumns= {@JoinColumn(name="course_id", referencedColumnName="id")})
+//	private Set<Student> student;
 
 	public Course() {
 		super();
@@ -62,7 +62,7 @@ public class Course {
 		this.status = status;
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
-		this.student = student;
+//		this.student = student;
 	}
 
 	public int getId() {
@@ -129,13 +129,13 @@ public class Course {
 		UpdatedAt = updatedAt;
 	}
 
-	public Set<Student> getStudent() {
-		return student;
-	}
-
-	public void setStudent(Set<Student> student) {
-		this.student = student;
-	}
+//	public Set<Student> getStudent() {
+//		return student;
+//	}
+//
+//	public void setStudent(Set<Student> student) {
+//		this.student = student;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -151,7 +151,7 @@ public class Course {
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + status;
-		result = prime * result + ((student == null) ? 0 : student.hashCode());
+//		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		return result;
 	}
 
@@ -192,11 +192,11 @@ public class Course {
 			return false;
 		if (status != other.status)
 			return false;
-		if (student == null) {
-			if (other.student != null)
-				return false;
-		} else if (!student.equals(other.student))
-			return false;
+//		if (student == null) {
+//			if (other.student != null)
+//				return false;
+//		} else if (!student.equals(other.student))
+//			return false;
 		return true;
 	}
 
@@ -204,7 +204,9 @@ public class Course {
 	public String toString() {
 		return "Course [id=" + id + ", instructorId=" + instructorId + ", hours=" + hours + ", price=" + price
 				+ ", description=" + description + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt="
-				+ UpdatedAt + ", student=" + student + "]";
+				+ UpdatedAt + ", "
+//						+ "student=" + student + "]"
+								+ "";
 	}
 	
 	
