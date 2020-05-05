@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class Test {
 	private Date updatedAt;
 	
 	//Student Lesson JT
-		@ManyToMany
+		@ManyToMany(fetch = FetchType.EAGER)
 		@JoinTable(name = "student_test", 
 		joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
 		inverseJoinColumns= {@JoinColumn(name="test_id", referencedColumnName="id")})

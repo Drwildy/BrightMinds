@@ -22,6 +22,11 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 	<!-- Tell Spring where to look for static resources and how those resources should be mapped. -->
 	<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
 	
+	<!-- Allows CORS for the /** path pattern with the default properties -->
+	<mvc:cors>
+		<mvc:mapping path="/**"></mvc:mapping>
+	</mvc:cors>
+	
 	<context:component-scan base-package="com.brightminds.controller"></context:component-scan>
 	
 	<!-- Set up our internal resource view resolver. -->

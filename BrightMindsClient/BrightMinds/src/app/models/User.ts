@@ -1,17 +1,19 @@
+import { Type } from './Type';
+
 export class User{
     
-    private id:number;
-    private typeId:number;
-    private username:string;
-    private password:string;
-    private status:number;
-    private createdAt:Date;
-    private updatedAt:Date;
+    public id:number;
+    public typeid:Type;
+    public username:string;
+    public password:string;
+    public status:number;
+    public createdAt:number;
+    public updatedAt:number;
 
-    constructor(id:number, typeId:number, username:string, password:string,
-        status:number, createdAt:Date, updatedAt:Date){
+    constructor(id:number, typeid:Type, username:string, password:string,
+        status:number, createdAt:number, updatedAt:number){
             this.id = id;
-            this.typeId = typeId;
+            this.typeid = typeid;
             this.username = username;
             this.password = password;
             this.status = status;
@@ -27,12 +29,12 @@ export class User{
         this.id = id;
     }
 
-    public getTypeId():number{
-        return this.typeId;
+    public getTypeId():Type{
+        return this.typeid;
     }
 
-    public setTypeId(typeId:number){
-        this.typeId = typeId;
+    public setTypeId(typeId:Type){
+        this.typeid = typeId;
     }
 
     public getUsername():string{
@@ -59,19 +61,19 @@ export class User{
         this.status = status;
     }
 
-    public getCreatedAt():Date{
+    public getCreatedAt():number{
         return this.createdAt;
     }
 
-    public setCreatedAt(createdAt:Date){
+    public setCreatedAt(createdAt:number){
         this.createdAt = createdAt;
     }
 
-    public getUpdatedAt():Date{
+    public getUpdatedAt():number{
         return this.updatedAt;
     }
 
-    public setUpdatedAt(updatedAt:Date){
+    public setUpdatedAt(updatedAt:number){
         this.updatedAt = updatedAt;
     }
 

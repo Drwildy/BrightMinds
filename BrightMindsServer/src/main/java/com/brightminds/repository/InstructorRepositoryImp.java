@@ -9,13 +9,27 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.Instructor;
+import com.brightminds.model.User;
 import com.brightminds.util.HibernateConfiguration;
 
+@Repository(value ="instructorRepository")
+@Transactional
 public class InstructorRepositoryImp implements InstructorRepository{
+	
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public InstructorRepositoryImp(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public void insert(Instructor a) {
@@ -116,6 +130,32 @@ public class InstructorRepositoryImp implements InstructorRepository{
 		}
 		
 		return p;
+	}
+
+	@Override
+	public Instructor getByUserId(User userId) {
+		Instructor instructor = null;
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "FROM Instructor i WHERE userid = :userId";
+			Query<Instructor> q = s.createQuery(HQL, Instructor.class);
+			q.setParameter("userId", userId);
+			instructor = q.getSingleResult();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return instructor;
 	}
 
 }

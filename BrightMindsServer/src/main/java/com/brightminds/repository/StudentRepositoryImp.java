@@ -9,20 +9,34 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.Student;
+import com.brightminds.model.User;
 import com.brightminds.util.HibernateConfiguration;
 
+@Repository(value ="studentRepository")
+@Transactional
 public class StudentRepositoryImp implements StudentRepository{
 
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public StudentRepositoryImp(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	@Override
 	public void insert(Student a) {
 		Session s = null;
 		Transaction tx = null;
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
@@ -116,6 +130,32 @@ public class StudentRepositoryImp implements StudentRepository{
 		}
 		
 		return p;
+	}
+
+	@Override
+	public Student getByUserId(User userId) {
+		Student student = null;
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "FROM Student s WHERE userid = :userId";
+			Query<Student> q = s.createQuery(HQL, Student.class);
+			q.setParameter("userId", userId);
+			student = q.getSingleResult();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return student;
 	}
 
 }

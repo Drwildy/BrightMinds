@@ -25,7 +25,7 @@ public class Admin {
 	private int id;
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "users_id")
-	private User userId;
+	private User userid;
 	@Column
 	private String firstName;
 	@Column
@@ -43,7 +43,7 @@ public class Admin {
 	public Admin(int id, User userId, String firstName, String lastName, int status, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.userid = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.status = status;
@@ -57,10 +57,10 @@ public class Admin {
 		this.id = id;
 	}
 	public User getUserId() {
-		return userId;
+		return userid;
 	}
 	public void setUserId(User userId) {
-		this.userId = userId;
+		this.userid = userId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -102,7 +102,7 @@ public class Admin {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + status;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
 		return result;
 	}
 	@Override
@@ -138,16 +138,16 @@ public class Admin {
 			return false;
 		if (status != other.status)
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
+		if (userid == null) {
+			if (other.userid != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!userid.equals(other.userid))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName
+		return "Admin [id=" + id + ", userId=" + userid + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + "]";
 	}
 	
