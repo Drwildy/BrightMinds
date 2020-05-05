@@ -32,6 +32,7 @@ public class CourseService {
 		return getAllCourses;
 
 	}
+
 	public void save(Course c) {
 		courseRepository.insert(c);
 	}

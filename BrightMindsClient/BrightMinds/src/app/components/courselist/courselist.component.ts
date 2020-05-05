@@ -13,7 +13,12 @@ export class CourselistComponent implements OnInit {
   constructor(private courseservice:CoursesService) { }
 
   ngOnInit(): void {
-    this.listofcourse=this.courseservice.getCourses()
+    this.courseservice.getCourses().subscribe(
+      result=>{
+        console.log("result is",result);
+        
+      this.listofcourse=result
+    })
   }
 
 }

@@ -10,47 +10,14 @@ export class CoursesService {
 
   
 
-coursesList:Course[]=[
-  {
-      "id": 1,
-      "instructorId": null,
-      "hours": 2,
-      "price": 22.0,
-      "description": "something",
-      "status": 1,
-      "createdAt": null,
-      "updatedAt": null
-  },
-  {
-      "id": 2,
-      "instructorId": null,
-      "hours": 1,
-      "price": 122.0,
-      "description": "Java programming language",
-      "status": 1,
-      "createdAt": null,
-      "updatedAt": null
-  },
-  {
-      "id": 3,
-      "instructorId": null,
-      "hours": 1,
-      "price": 122.0,
-      "description": "Advanced Java programming language",
-      "status": 1,
-      "createdAt": null,
-      "updatedAt": null
-  }
-]
+coursesList
 
   constructor(private http:HttpClient) { }
 
-  getCourses():Course[]{
+  getCourses():Observable<Course[]>{
     // return this.coursesList
-    this.getCoursesFromServer().subscribe((courses)=>{this.coursesList=courses})
-    return this.coursesList
+    return this.http.get('http://localhost:8080/BrightMinds/course/listOfCourse')as Observable<Course[]>;
   }
-  getCoursesFromServer():Observable<Course[]>{
-    return this.http.get<Course[]>("http://localhost:8080/BrightMinds/course/listOfCourse")
-  }
+   
+  
 }

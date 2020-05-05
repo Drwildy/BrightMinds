@@ -20,35 +20,36 @@ import org.springframework.transaction.annotation.Transactional;
 import com.brightminds.model.Course;
 import com.brightminds.util.HibernateConfiguration;
 
-@Repository(value ="courseRepository")
+@Repository(value = "courseRepository")
 @Transactional
-public class CourseRepositoryImp implements CourseRepository{
+public class CourseRepositoryImp implements CourseRepository {
 
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public CourseRepositoryImp(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 	@Override
 	public void insert(Course a) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			Session s = null;
 			Transaction tx = null;
 			try {
-				//s = HibernateConfiguration.getSession();
+				// s = HibernateConfiguration.getSession();
 				s = sessionFactory.openSession();
 				tx = s.beginTransaction();
 				s.save(a);
 				tx.commit();
-			}catch(HibernateException e) {
+			} catch (HibernateException e) {
 				tx.rollback();
 				e.printStackTrace();
-			}finally {
+			} finally {
 				s.close();
-			}	
-		}catch (Exception e) {
+			}
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
@@ -56,13 +57,13 @@ public class CourseRepositoryImp implements CourseRepository{
 	@Override
 	public void update(Course a) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(int a) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -70,17 +71,17 @@ public class CourseRepositoryImp implements CourseRepository{
 		List<Course> course = new ArrayList<>();
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
 //			s = HibernateConfiguration.getSession();
 			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			course = s.createNativeQuery("select * from course", Course.class).list();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
 		return course;
@@ -91,24 +92,24 @@ public class CourseRepositoryImp implements CourseRepository{
 		Course p = null;
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
 			s = HibernateConfiguration.getSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Course> cq = cb.createQuery(Course.class); 
-			Root<Course> root = cq.from(Course.class); 
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+			Root<Course> root = cq.from(Course.class);
 			cq.select(root).where(cb.equal(root.get("courseId"), id));
 			Query<Course> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
-		
+
 		return p;
 	}
 
@@ -117,24 +118,24 @@ public class CourseRepositoryImp implements CourseRepository{
 		Course p = null;
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
 			s = HibernateConfiguration.getSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Course> cq = cb.createQuery(Course.class); 
-			Root<Course> root = cq.from(Course.class); 
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+			Root<Course> root = cq.from(Course.class);
 			cq.select(root).where(cb.equal(root.get("coursename"), name));
 			Query<Course> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
-		
+
 		return p;
 	}
 

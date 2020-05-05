@@ -19,28 +19,31 @@ import javax.persistence.Table;
 
 @Table(name = "course")
 public class Course {
-	
+
 	@Id
-	@GeneratedValue(generator ="course_id_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name="course_id_seq", allocationSize=1)
+	@GeneratedValue(generator = "course_id_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "course_id_seq", allocationSize = 1)
 	@Column
 	private int id;
 	@ManyToOne
-	@JoinColumn(name ="instructor_id")
+	@JoinColumn(name = "instructor_id")
 	private Instructor instructorId;
 	@Column
 	private int hours;
 	@Column
 	private double price;
+	// add title here
+	@Column
+	private String title;
 	@Column
 	private String description;
 	@Column
-	private int status; //0- to be deleted 1- created 9 - cancel
+	private int status; // 0- to be deleted 1- created 9 - cancel
 	@Column
 	private Date CreatedAt;
 	@Column
 	private Date UpdatedAt;
-	
+
 //	@ManyToMany
 //	@JoinTable(name = "student_course", 
 //	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
@@ -51,13 +54,14 @@ public class Course {
 		super();
 	}
 
-	public Course(int id, Instructor instructorId, int hours, double price, String description, int status,
-			Date createdAt, Date updatedAt, Set<Student> student) {
+	public Course(int id, Instructor instructorId, int hours, double price, String title, String description,
+			int status, Date createdAt, Date updatedAt, Set<Student> student) {
 		super();
 		this.id = id;
 		this.instructorId = instructorId;
 		this.hours = hours;
 		this.price = price;
+		this.title = title;
 		this.description = description;
 		this.status = status;
 		CreatedAt = createdAt;
@@ -95,6 +99,14 @@ public class Course {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -143,6 +155,8 @@ public class Course {
 		int result = 1;
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
+
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + hours;
 		result = prime * result + id;
@@ -174,6 +188,12 @@ public class Course {
 				return false;
 		} else if (!UpdatedAt.equals(other.UpdatedAt))
 			return false;
+
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -203,11 +223,10 @@ public class Course {
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", instructorId=" + instructorId + ", hours=" + hours + ", price=" + price
-				+ ", description=" + description + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt="
-				+ UpdatedAt + ", "
+				+ ", title=" + title + ", description=" + description + ", status=" + status + ", CreatedAt="
+				+ CreatedAt + ", UpdatedAt=" + UpdatedAt + ", "
 //						+ "student=" + student + "]"
-								+ "";
+				+ "";
 	}
-	
-	
+
 }
