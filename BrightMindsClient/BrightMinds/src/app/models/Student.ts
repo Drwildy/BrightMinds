@@ -2,16 +2,16 @@ import { User } from './User';
 
 export class Student {
 
-    private id:number;
-    private userId:User;
-    private firstName:string;
-    private lastName:string;
-    private phoneNumber:string;
-    private address:string;
-    private DOB:number;
-    private status:number;
-    private createdAt:number;
-    private updatedAt:number;
+    public id:number;
+    public userId:User;
+    public firstName:string;
+    public lastName:string;
+    public phoneNumber:string;
+    public address:string;
+    public DOB:number;
+    public status:number;
+    public createdAt:number;
+    public updatedAt:number;
 
     constructor( id:number, userId:User, firstName:string, lastName:string, phoneNumber:string,
         address:string, DOB:number, status:number, createdAt:number, UpdatedAt:number){

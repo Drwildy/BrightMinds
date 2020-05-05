@@ -35,5 +35,9 @@ public class UserService {
 	public User getByUsername(String username) {
 		return this.userRepository.getByUsername(username);
 	}
+	
+	public User login(String username, String password) {
+		return this.userRepository.login(username, password);
+	}
 
 }

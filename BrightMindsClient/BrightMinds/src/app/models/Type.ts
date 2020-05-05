@@ -1,11 +1,11 @@
 
 export class Type {
 
-    private id:number
-    private type:string;
-    private status:number;
-    private createdAt:number;
-    private updatedAt:number;
+    public id:number
+    public type:string;
+    public status:number;
+    public createdAt:number;
+    public updatedAt:number;
 
     constructor(id:number, type:string, status:number, createdAt:number, updatedAt:number){
         this.id = id;

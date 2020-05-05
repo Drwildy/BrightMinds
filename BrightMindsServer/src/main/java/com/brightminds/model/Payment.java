@@ -36,6 +36,7 @@ public class Payment {
 	private Date CreatedAt;
 	@Column
 	private Date UpdatedAt;
+	
 	public Payment() {
 		super();
 	}

@@ -51,5 +51,12 @@ public class StudentController {
 
 		this.studentService.insertStudent(s);
 	}
+	
+	@PostMapping(path="/getStudent", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Student getStudent(@RequestBody User u) {
+		
+		//Returns a student to the Angular
+		return this.studentService.getByUserId(u);
+	}
 		
 }

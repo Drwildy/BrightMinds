@@ -92,13 +92,11 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         result =>
         {
-          //console.log("This is the user result" + result);
           let student = new Student(0, user, this.firstName, this.lastName, this.phoneNumber, this.address, date, 1, createdAt, updatedAt);
           this.registerService.registerStudent(student).subscribe(
             result =>
             {
-              //console.log("This is the students result " + result)
-              this.router.navigateByUrl(`/login`);
+              this.router.navigate(['login']);
             },
             error =>
             {

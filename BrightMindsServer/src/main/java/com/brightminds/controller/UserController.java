@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brightminds.model.Type;
@@ -35,6 +34,12 @@ public class UserController {
 		Type type = this.typeService.getById(typeid);
 		u.setTypeid(type); //sets a Type Object
 		this.userService.insertUser(u);
+	}
+	
+	@PostMapping(path="/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public User login(@RequestBody User u) {
+		
+		return this.userService.login(u.getUsername(), u.getPassword());
 	}
 
 }
