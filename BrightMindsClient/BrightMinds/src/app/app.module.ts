@@ -9,13 +9,17 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { CourseComponent } from './components/course/course.component';
+import { CourselistComponent } from './components/courselist/courselist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CourseComponent,
+    CourselistComponent
   ],
   imports: [
     BrowserModule,

@@ -20,50 +20,55 @@ import javax.persistence.Table;
 
 @Table(name = "course")
 public class Course {
-	
+
 	@Id
-	@GeneratedValue(generator ="course_id_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name="course_id_seq", allocationSize=1)
+	@GeneratedValue(generator = "course_id_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "course_id_seq", allocationSize = 1)
 	@Column
 	private int id;
 	@ManyToOne
-	@JoinColumn(name ="instructor_id")
+	@JoinColumn(name = "instructor_id")
 	private Instructor instructorId;
 	@Column
 	private int hours;
 	@Column
 	private double price;
+	// add title here
+	@Column
+	private String title;
 	@Column
 	private String description;
 	@Column
-	private int status; //0- to be deleted 1- created 9 - cancel
+	private int status; // 0- to be deleted 1- created 9 - cancel
 	@Column
 	private Date CreatedAt;
 	@Column
 	private Date UpdatedAt;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_course", 
 	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
 	inverseJoinColumns= {@JoinColumn(name="course_id", referencedColumnName="id")})
 	private Set<Student> student;
 
+
 	public Course() {
 		super();
 	}
 
-	public Course(int id, Instructor instructorId, int hours, double price, String description, int status,
-			Date createdAt, Date updatedAt, Set<Student> student) {
+	public Course(int id, Instructor instructorId, int hours, double price, String title, String description,
+			int status, Date createdAt, Date updatedAt, Set<Student> student) {
 		super();
 		this.id = id;
 		this.instructorId = instructorId;
 		this.hours = hours;
 		this.price = price;
+		this.title = title;
 		this.description = description;
 		this.status = status;
 		CreatedAt = createdAt;
 		UpdatedAt = updatedAt;
-		this.student = student;
+//		this.student = student;
 	}
 
 	public int getId() {
@@ -98,6 +103,14 @@ public class Course {
 		this.price = price;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -130,13 +143,13 @@ public class Course {
 		UpdatedAt = updatedAt;
 	}
 
-	public Set<Student> getStudent() {
-		return student;
-	}
-
-	public void setStudent(Set<Student> student) {
-		this.student = student;
-	}
+//	public Set<Student> getStudent() {
+//		return student;
+//	}
+//
+//	public void setStudent(Set<Student> student) {
+//		this.student = student;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -144,6 +157,8 @@ public class Course {
 		int result = 1;
 		result = prime * result + ((CreatedAt == null) ? 0 : CreatedAt.hashCode());
 		result = prime * result + ((UpdatedAt == null) ? 0 : UpdatedAt.hashCode());
+
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + hours;
 		result = prime * result + id;
@@ -152,7 +167,7 @@ public class Course {
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + status;
-		result = prime * result + ((student == null) ? 0 : student.hashCode());
+//		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		return result;
 	}
 
@@ -175,6 +190,12 @@ public class Course {
 				return false;
 		} else if (!UpdatedAt.equals(other.UpdatedAt))
 			return false;
+
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -193,20 +214,21 @@ public class Course {
 			return false;
 		if (status != other.status)
 			return false;
-		if (student == null) {
-			if (other.student != null)
-				return false;
-		} else if (!student.equals(other.student))
-			return false;
+//		if (student == null) {
+//			if (other.student != null)
+//				return false;
+//		} else if (!student.equals(other.student))
+//			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", instructorId=" + instructorId + ", hours=" + hours + ", price=" + price
-				+ ", description=" + description + ", status=" + status + ", CreatedAt=" + CreatedAt + ", UpdatedAt="
-				+ UpdatedAt + ", student=" + student + "]";
+				+ ", title=" + title + ", description=" + description + ", status=" + status + ", CreatedAt="
+				+ CreatedAt + ", UpdatedAt=" + UpdatedAt + ", "
+//						+ "student=" + student + "]"
+				+ "";
 	}
-	
-	
+
 }
