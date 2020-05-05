@@ -40,7 +40,7 @@ public class Lesson {
 	@Column
 	private Date updatedAt;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_lesson", 
 	joinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")},
 	inverseJoinColumns= {@JoinColumn(name="lesson_id", referencedColumnName="id")})

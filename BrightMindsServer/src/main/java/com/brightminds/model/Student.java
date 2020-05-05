@@ -47,21 +47,21 @@ public class Student {
 	private Date updatedAt;
 	
 	//Student Course JT
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_course", 
 	joinColumns= {@JoinColumn(name="course_id", referencedColumnName="id")},
 	inverseJoinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")})
 	private Set<Course> course;
 	
 	//Student Lesson JT
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_lesson", 
 	joinColumns= {@JoinColumn(name="lesson_id", referencedColumnName="id")},
 	inverseJoinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")})
 	private Set<Lesson> lesson;
 	
 	//Student Lesson JT
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "student_test", 
 	joinColumns= {@JoinColumn(name="test_id", referencedColumnName="id")},
 	inverseJoinColumns= {@JoinColumn(name="student_id", referencedColumnName="id")})

@@ -3,6 +3,7 @@ package com.brightminds.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -11,13 +12,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brightminds.model.Student;
 import com.brightminds.model.User;
 
 @Repository(value ="userRepository")
@@ -144,6 +143,36 @@ public class UserRepositoryImp implements UserRepository {
 			user = q.getSingleResult();
 			tx.commit();
 		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return user;
+	}
+	
+	@Override
+	public User login(String username, String password) {
+		User user = null;
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "FROM User u WHERE username = :username AND password = :password";
+			Query<User> q = s.createQuery(HQL, User.class);
+			q.setParameter("username", username);
+			q.setParameter("password", password);
+			user = q.getSingleResult();
+			
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}catch(NoResultException e) {
 			tx.rollback();
 			e.printStackTrace();
 		}finally {

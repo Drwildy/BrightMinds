@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.Student;
+import com.brightminds.model.User;
 import com.brightminds.util.HibernateConfiguration;
 
 @Repository(value ="studentRepository")
@@ -129,6 +130,32 @@ public class StudentRepositoryImp implements StudentRepository{
 		}
 		
 		return p;
+	}
+
+	@Override
+	public Student getByUserId(User userId) {
+		Student student = null;
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "FROM Student s WHERE userid = :userId";
+			Query<Student> q = s.createQuery(HQL, Student.class);
+			q.setParameter("userId", userId);
+			student = q.getSingleResult();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return student;
 	}
 
 }
