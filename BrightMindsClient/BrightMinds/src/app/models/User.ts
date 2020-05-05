@@ -2,13 +2,13 @@ import { Type } from './Type';
 
 export class User{
     
-    private id:number;
-    private typeid:Type;
-    private username:string;
-    private password:string;
-    private status:number;
-    private createdAt:number;
-    private updatedAt:number;
+    public id:number;
+    public typeid:Type;
+    public username:string;
+    public password:string;
+    public status:number;
+    public createdAt:number;
+    public updatedAt:number;
 
     constructor(id:number, typeid:Type, username:string, password:string,
         status:number, createdAt:number, updatedAt:number){

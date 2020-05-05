@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { User } from '../models/User';
 import { Student } from '../models/Student';
@@ -16,19 +17,67 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(username:string, password:string): Observable<User>{
-    return this.http.get('http://localhost:8080/Brightminds/loginorsomethingwhoknows') as Observable<User>
+
+    let user = new User(0, null, username, password, 0, 1, 1);
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+      id: user.getId(),
+      typeid: user.getTypeId(),
+      username: user.getUsername(),
+      password: user.getPassword(),
+      status: user.getStatus(),
+      createdAt: user.getCreatedAt(),
+      updatedAt: user.getUpdatedAt()
+    })
+
+    return this.http.post<User>('http://localhost:8080/BrightMinds/user/login', body, {headers: headers});
   }
 
-  getStudent() :Observable<Student>{
-    return this.http.get('somethingInHere') as Observable<Student>
+  getStudent(user:User): Observable<Student>{
+   
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+      id: user.id,
+      typeid: user.typeid,
+      username: user.username,
+      password: user.password,
+      status: user.status,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    })
+    return this.http.post<Student>('http://localhost:8080/BrightMinds/student/getStudent', body, {headers: headers});
   }
 
-  getInstructor() :Observable<Instructor>{
-    return this.http.get('somethingInHere') as Observable<Student>
+  getInstructor(user:User) :Observable<Instructor>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+      id: user.id,
+      typeid: user.typeid,
+      username: user.username,
+      password: user.password,
+      status: user.status,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    })
+
+    return this.http.post<Instructor>('http://localhost:8080/BrightMinds/instructor/getInstructor', body, {headers: headers});
   }
 
-  getAdmin() :Observable<Admin>{
-    return this.http.get('somethingInHere') as Observable<Admin>
+  getAdmin(user:User) :Observable<Admin>{
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+      id: user.id,
+      typeid: user.typeid,
+      username: user.username,
+      password: user.password,
+      status: user.status,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    })
+
+    return this.http.post<Admin>('http://localhost:8080/BrightMinds/admin/getAdmin', body, {headers: headers});
   }
 
 
