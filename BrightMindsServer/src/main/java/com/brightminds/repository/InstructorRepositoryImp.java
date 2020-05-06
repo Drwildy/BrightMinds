@@ -158,4 +158,42 @@ public class InstructorRepositoryImp implements InstructorRepository{
 		return instructor;
 	}
 
+	@Override
+	public void editInfo(Instructor i) {
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "UPDATE Instructor i SET "
+					+ "firstname = :firstname, "
+					+ "lastname = :lastname, "
+					+ "phonenumber = :phonenumber, "
+					+ "address = :address, "
+					+ "dateofbirth = :dateofbirth, "
+					+ "degree = :degree "
+					+ "WHERE id = :id";
+			Query<Instructor> q = s.createQuery(HQL);
+			
+			q.setParameter("firstname", i.getFirstName());
+			q.setParameter("lastname", i.getLastName());
+			q.setParameter("phonenumber", i.getPhoneNumber());
+			q.setParameter("address", i.getAddress());
+			q.setParameter("dateofbirth", i.getDateOfBirth());
+			q.setParameter("degree", i.getDegree());
+			q.setParameter("id", i.getId());
+			
+			q.executeUpdate();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}		
+	}
+
 }
