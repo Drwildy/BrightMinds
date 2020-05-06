@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { CourseComponent } from './components/course/course.component';
 import { CourselistComponent } from './components/courselist/courselist.component';
+import { InstructorComponent } from './components/instructor/instructor.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CourselistComponent } from './components/courselist/courselist.componen
     RegisterComponent,
     ForgotPasswordComponent,
     CourseComponent,
-    CourselistComponent
+    CourselistComponent,
+    InstructorComponent
   ],
   imports: [
     BrowserModule,

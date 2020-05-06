@@ -28,5 +28,9 @@ public class InstructorService {
 	public Instructor getByUserId(User userId) {
 		return this.instructorRepository.getByUserId(userId);
 	}
+	
+	public Instructor getById(int id) {
+		return this.instructorRepository.getById(id);
+	}
 
 }

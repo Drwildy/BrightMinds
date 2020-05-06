@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>{firstName}'s' Home Page</title>
+</head>
+<body>
+    <form class="border border-light p-5" (ngSubmit)="registerCourse()" #courseForm="ngForm">
+        <div class="container">
+            <h1 class="mb-4 text-center">Add Course</h1>
+            <h4 class="mb-4 text-center">Please Enter your course information here...</h4>
+            <p>Name of Course:</p>
+            <input type="text" id="courseFormTitle" class="form-control mb-4" placeholder="Title" [(ngModel)]="title" name="usernameInput" #titleInput="ngModel">
+            <p>Hours:</p>
+            <input type="number" id="courseFormHours" class="form-control mb-4" placeholder="0" [(ngModel)]="hours" name="passwordInput" #hoursInput="ngModel">
+            <p>Price:</p>
+            <input type="number" id="courseFormPrice" class="form-control mb-4" placeholder="0" [(ngModel)]="price" name="usernameInput" #priceInput="ngModel">
+            <p>Short Description:</p>
+            <input type="text" id="courseFormDescription" class="form-control mb-4" placeholder="Write your Description here" [(ngModel)]="description" name="usernameInput" #desciptionInput="ngModel">
+
+            <div *ngIf="bad" class="alert alert-danger">Something is WRONG</div>
+            <div class="text-center">
+                <button class="btn btn-success custom-btn my-4 text-center" type="submit">Add Course</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
+
