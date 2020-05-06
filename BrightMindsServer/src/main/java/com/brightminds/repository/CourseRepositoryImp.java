@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.brightminds.model.Course;
+import com.brightminds.model.Instructor;
 import com.brightminds.util.HibernateConfiguration;
 
 @Repository(value = "courseRepository")
@@ -137,6 +138,32 @@ public class CourseRepositoryImp implements CourseRepository {
 		}
 
 		return p;
+	}
+
+	@Override
+	public List<Course> getMyCoursesById(Instructor i) {
+		List<Course> courses = new ArrayList<>();
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "FROM Course c WHERE instructor_id = :instructorid AND status = 2";
+			Query<Course> q = s.createQuery(HQL, Course.class);
+			q.setParameter("instructorid", i);
+			courses = q.getResultList();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}
+		
+		return courses;
 	}
 
 }

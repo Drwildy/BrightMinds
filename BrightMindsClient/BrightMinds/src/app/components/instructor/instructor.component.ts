@@ -58,7 +58,7 @@ export class InstructorComponent implements OnInit {
     this.DOB = sessionStorage.getItem("DOB");
     this.degree = sessionStorage.getItem("Degree");
 
-    console.log(sessionStorage.getItem("DOB"));
+    this.getMyActiveCourses();
 
   }
 
@@ -119,7 +119,23 @@ export class InstructorComponent implements OnInit {
         this.address = sessionStorage.getItem("Address");
         this.DOB = sessionStorage.getItem("DOB");
         this.degree = sessionStorage.getItem("Degree");
+  }
 
+  getMyActiveCourses():void{
+
+    let date = new Date(this.DOB).getTime();
+    let instructor = new Instructor(this.instid, null, this.firstName, this.lastName, this.phoneNumber, 
+      this.address, date, this.degree, null, null, null);
+
+    this.instructorService.getMyActiveCourses(instructor)
+      .subscribe(
+        result =>{
+          console.log(result);
+        },
+        error =>{
+
+        }
+      )
 
   }
 
