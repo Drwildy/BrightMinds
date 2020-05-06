@@ -58,7 +58,7 @@ export class InstructorComponent implements OnInit {
     let instructor = new Instructor(this.instructorId, null, null, null, null, null, null, null, null, null, null);
     let course = new Course(0, instructor, this.hours, this.price, this.title, this.description, 1, null, null);
 
-    
+    this.instructorService.registerCourse(course)
     .subscribe(
       result =>{
 
