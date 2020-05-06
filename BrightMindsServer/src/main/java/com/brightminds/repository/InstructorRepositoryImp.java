@@ -36,7 +36,7 @@ public class InstructorRepositoryImp implements InstructorRepository{
 		Session s = null;
 		Transaction tx = null;
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
@@ -82,19 +82,19 @@ public class InstructorRepositoryImp implements InstructorRepository{
 
 	@Override
 	public Instructor getById(int id) {
-		Instructor p = null;
+		Instructor instructor = null;
 		Session s = null;
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Instructor> cq = cb.createQuery(Instructor.class); 
-			Root<Instructor> root = cq.from(Instructor.class); 
-			cq.select(root).where(cb.equal(root.get("instructorId"), id));
-			Query<Instructor> q = s.createQuery(cq);
-			p = q.getSingleResult();
+			
+			String HQL = "FROM Instructor i WHERE id = :id";
+			Query<Instructor> q = s.createQuery(HQL, Instructor.class);
+			q.setParameter("id", id);
+			instructor = q.getSingleResult();
+			
 			tx.commit();
 		}catch(HibernateException e) {
 			tx.rollback();
@@ -103,7 +103,7 @@ public class InstructorRepositoryImp implements InstructorRepository{
 			s.close();
 		}
 		
-		return p;
+		return instructor;
 	}
 
 	@Override

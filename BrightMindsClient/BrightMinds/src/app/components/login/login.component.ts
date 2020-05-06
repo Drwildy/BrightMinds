@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("Type", "Instructor");
 
         //Do some navigating to your Student page here.
-        //this.router.navigate(['instructor']);
+        this.router.navigate(['instructor']);
       },
       error =>{
         console.log(error);

@@ -36,4 +36,8 @@ public class CourseService {
 	public void save(Course c) {
 		courseRepository.insert(c);
 	}
+	
+	public void addCourse(Course c) {
+		this.courseRepository.insert(c);
+	}
 }
