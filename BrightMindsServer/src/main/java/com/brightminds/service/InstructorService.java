@@ -32,5 +32,9 @@ public class InstructorService {
 	public Instructor getById(int id) {
 		return this.instructorRepository.getById(id);
 	}
+	
+	public void editInfo(Instructor i) {
+		this.instructorRepository.editInfo(i);
+	}
 
 }

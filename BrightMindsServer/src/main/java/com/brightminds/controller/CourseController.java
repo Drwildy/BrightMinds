@@ -54,12 +54,9 @@ public class CourseController {
 	@PostMapping(path="/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void addCourse(@RequestBody Course c) {
 		
-		System.out.println(c);
-		
 		Instructor instructor = this.instructorService.getById(c.getInstructorId().getId());
 		c.setInstructorId(instructor);
 		
-		System.out.println(c);
 		this.courseService.addCourse(c);
 	}
 

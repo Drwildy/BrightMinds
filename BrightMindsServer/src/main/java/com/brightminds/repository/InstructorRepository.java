@@ -6,5 +6,6 @@ import com.brightminds.model.User;
 public interface InstructorRepository extends Base<Instructor> {
 
 	public Instructor getByUserId(User userId);
+	public void editInfo(Instructor i);
 
 }
