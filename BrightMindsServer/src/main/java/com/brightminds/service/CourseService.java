@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brightminds.model.Course;
+import com.brightminds.model.Instructor;
 import com.brightminds.repository.CourseRepository;
 
 @Service("courseService")
@@ -39,5 +40,9 @@ public class CourseService {
 	
 	public void addCourse(Course c) {
 		this.courseRepository.insert(c);
+	}
+	
+	public List<Course> getMyCoursesById(Instructor i){
+		return this.courseRepository.getMyCoursesById(i);
 	}
 }

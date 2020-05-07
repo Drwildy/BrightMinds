@@ -49,6 +49,22 @@
         </div>
     </form>
 
+    <h1>Courses </h1>
+    <div id="coursesContainer" class="offset-1 bg-light-gray">
+     <div *ngFor="let course of courseList">
+        <div id="courseCard" class="card col-mb-3 col-lg-3">
+            <h5 class="card-header">{{ course.title }}</h5>
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <p class="card-text">Hours: {{course.hours}}</p>
+              <p class="card-text">Price: {{course.price}}</p>
+              <p class="card-text">{{course.description}}</p>
+              <a routerLink="/course" class="btn btn-success float-right">View Course</a>
+            </div>
+        </div>
+     </div>
+   </div>
+
 </body>
 </html>
 

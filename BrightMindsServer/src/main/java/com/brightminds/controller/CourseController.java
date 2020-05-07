@@ -60,4 +60,14 @@ public class CourseController {
 		this.courseService.addCourse(c);
 	}
 
+	//getMyActiveCourses
+	@PostMapping(path="/getMyActiveCourses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Course> getActiveCoursesById(@RequestBody Instructor i) {
+		
+		Instructor instructor = this.instructorService.getById(i.getId());
+		
+		return this.courseService.getMyCoursesById(instructor);
+		
+	}
+	
 }
