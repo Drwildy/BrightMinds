@@ -1,0 +1,38 @@
+<div id="tbar" class="fixed-top">
+    
+    <div id="tbarOpt">
+        <h1>Bright Minds</h1>
+        <a [routerLink]="['/index']"><button class="btn btn-light">Home</button></a>
+        <a [routerLink]="['/student']"><button class="btn btn-light">Profile</button></a>
+        <a [routerLink]="['/login']"><button class="btn btn-light">Logout</button></a>        
+        <a><i class="fas fa-sign-out-alt"></i></a>
+    </div> 
+    <router-outlet></router-outlet> 
+</div>
+
+<section class="skewedBox">
+  
+
+    <div class="container">
+
+
+
+<form id="courseregistration"class="border border-light col-md-12 offset-2 bg-light">
+    <div class="form-row">
+    <div class="form-group col-md-12">
+    <label for="coursename">Course Name</label>
+    <input type="text" class="form-control" id="coursename" placeholder="coursename" disabled [value]="coursename">
+    </div>
+    <div class="form-group col-md-12">
+        <label for="courseprice">Course Price</label>
+        <input type="text" class="form-control" id="courseprice" placeholder="courseprice" disabled [value]="courseprice">
+        </div>
+
+<p *ngIf="ispaied">Congradulation it is paied</p>
+<p *ngIf="!ispaied">Do you want to pay <button (click)="payment()">Pay </button></p>
+          
+
+</div>
+</form>
+</div>
+</section>

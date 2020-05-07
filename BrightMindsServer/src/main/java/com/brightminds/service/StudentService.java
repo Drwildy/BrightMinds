@@ -30,6 +30,12 @@ public class StudentService {
 		return this.studentRepository.getByUserId(userId);
 	}
 	
+	public Student getStudentById(int id) {
+		return this.studentRepository.getById(id);
+	}
+	public void updateStudent(Student s) {
+		this.studentRepository.update(s);
+	}
 	
 
 }

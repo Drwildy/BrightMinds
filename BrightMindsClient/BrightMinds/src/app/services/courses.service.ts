@@ -18,6 +18,12 @@ coursesList
     // return this.coursesList
     return this.http.get('http://localhost:8080/BrightMinds/course/listOfCourse')as Observable<Course[]>;
   }
+
+  payment(courseid,studentid,price):Observable<any>{
+    // return this.coursesList
+    return this.http.get('http://localhost:8080/BrightMinds/course/pay?courseid='+courseid+"&&studentid="+studentid+"&&price="+price)as Observable<any>;
+  }
+
    
   
 }

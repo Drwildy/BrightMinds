@@ -40,4 +40,11 @@ public class CourseService {
 	public void addCourse(Course c) {
 		this.courseRepository.insert(c);
 	}
+	
+	public Course getCourseById(int id) {
+
+		return courseRepository.getById(id);
+
+	}
+	
 }

@@ -94,21 +94,19 @@ public class CourseRepositoryImp implements CourseRepository {
 		Transaction tx = null;
 
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			CriteriaBuilder cb = s.getCriteriaBuilder();
 			CriteriaQuery<Course> cq = cb.createQuery(Course.class);
 			Root<Course> root = cq.from(Course.class);
-			cq.select(root).where(cb.equal(root.get("courseId"), id));
+			cq.select(root).where(cb.equal(root.get("id"), id));
 			Query<Course> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
 		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			s.close();
-		}
+		} 
 
 		return p;
 	}

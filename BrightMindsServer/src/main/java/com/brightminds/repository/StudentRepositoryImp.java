@@ -50,9 +50,22 @@ public class StudentRepositoryImp implements StudentRepository{
 
 	@Override
 	public void update(Student a) {
-		// TODO Auto-generated method stub
-		
+		Session s = null;
+		Transaction tx = null;
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			s.save(a);
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}	
 	}
+		
+	
 
 	@Override
 	public void delete(int a) {
@@ -67,7 +80,7 @@ public class StudentRepositoryImp implements StudentRepository{
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			student = s.createNativeQuery("select * from student", Student.class).list();
 			tx.commit();
@@ -87,12 +100,12 @@ public class StudentRepositoryImp implements StudentRepository{
 		Transaction tx = null;
 		
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			CriteriaBuilder cb = s.getCriteriaBuilder(); 
 			CriteriaQuery<Student> cq = cb.createQuery(Student.class); 
 			Root<Student> root = cq.from(Student.class); 
-			cq.select(root).where(cb.equal(root.get("studentId"), id));
+			cq.select(root).where(cb.equal(root.get("id"), id));
 			Query<Student> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
@@ -157,5 +170,6 @@ public class StudentRepositoryImp implements StudentRepository{
 		
 		return student;
 	}
+
 
 }
