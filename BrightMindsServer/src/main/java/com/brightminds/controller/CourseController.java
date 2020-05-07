@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brightminds.model.Course;
@@ -68,6 +69,20 @@ public class CourseController {
 		
 		return this.courseService.getMyCoursesById(instructor);
 		
+	}
+	
+	
+	@PostMapping(path="/getCourseById", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Course getCourseById(@RequestBody Course c) {
+		
+		return this.courseService.getCourseById(c.getId());
+	}
+	
+	@PostMapping(path="/editInfo", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void editInfo(@RequestBody Course c) {
+		
+		System.out.println(c);
+		this.courseService.editInfo(c);
 	}
 	
 }

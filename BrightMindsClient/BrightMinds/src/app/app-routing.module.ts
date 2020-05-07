@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { CourselistComponent } from './components/courselist/courselist.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
+import { CourseComponent } from './components/course/course.component';
 
 
 
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     component: CourselistComponent,
     path: "courses"
+  },
+  {
+    component: CourseComponent,
+    path: "course"
   },
   {
     component: InstructorComponent,

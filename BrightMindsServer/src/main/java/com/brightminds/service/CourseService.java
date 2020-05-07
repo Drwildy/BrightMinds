@@ -45,4 +45,12 @@ public class CourseService {
 	public List<Course> getMyCoursesById(Instructor i){
 		return this.courseRepository.getMyCoursesById(i);
 	}
+	
+	public Course getCourseById(int id) {
+		return this.courseRepository.getById(id);
+	}
+	
+	public void editInfo(Course c) {
+		this.courseRepository.editInfo(c);
+	}
 }

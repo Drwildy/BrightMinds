@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/course';
 import { InstructorService } from 'src/app/services/instructor.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Instructor } from 'src/app/models/Instructor';
 
 @Component({
@@ -19,6 +19,7 @@ export class InstructorComponent implements OnInit {
     public address:string;
     public DOB:string;
     public degree:string;
+    public type:string;
 
     //Edit your info
     public editinstid:number;
@@ -52,17 +53,20 @@ export class InstructorComponent implements OnInit {
   ngOnInit(): void {
 
     //Perform auth check first?
-
-    this.instid = Number(sessionStorage.getItem("id"));
-    this.firstName = sessionStorage.getItem("First Name");
-    this.lastName = sessionStorage.getItem("Last Name");
-    this.phoneNumber = sessionStorage.getItem("Phone Number");
-    this.address = sessionStorage.getItem("Address");
-    this.DOB = sessionStorage.getItem("DOB");
-    this.degree = sessionStorage.getItem("Degree");
-
-    this.getMyActiveCourses();
-
+    this.type = sessionStorage.getItem("Type");
+    if(this.type != "Instructor"){
+      this.router.navigate([""]);
+    }else{
+      this.instid = Number(sessionStorage.getItem("id"));
+      this.firstName = sessionStorage.getItem("First Name");
+      this.lastName = sessionStorage.getItem("Last Name");
+      this.phoneNumber = sessionStorage.getItem("Phone Number");
+      this.address = sessionStorage.getItem("Address");
+      this.DOB = sessionStorage.getItem("DOB");
+      this.degree = sessionStorage.getItem("Degree");
+  
+      this.getMyActiveCourses();
+    }
   }
 
   registerCourse(): void{
@@ -134,12 +138,30 @@ export class InstructorComponent implements OnInit {
       .subscribe(
         result =>{
           this.courseList = result;
-          console.log(this.courseList);
+          ///console.log(this.courseList);
         },
         error =>{
 
         }
       )
+  }
+
+  navigateToCourse(course: Course):void {
+    
+    let courseDetails: NavigationExtras = {
+      queryParams: {
+        "id": course.id,
+        "title": course.title,
+        "instructor": course.instructorId,
+        "hours": course.hours,
+        "price": course.price,
+        "description": course.description,
+        "course": course
+      }
+    }
+    
+    this.router.navigate(["/course"], courseDetails);
+
   }
 
 }

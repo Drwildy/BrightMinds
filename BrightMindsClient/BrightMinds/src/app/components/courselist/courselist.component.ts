@@ -15,7 +15,7 @@ export class CourselistComponent implements OnInit {
   ngOnInit(): void {
     this.courseservice.getCourses().subscribe(
       result=>{
-        console.log("result is",result);
+        //console.log("result is",result);
         
       this.listofcourse=result
     })
