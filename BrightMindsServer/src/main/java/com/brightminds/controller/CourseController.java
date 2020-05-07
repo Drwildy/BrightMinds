@@ -81,7 +81,7 @@ public class CourseController {
 	@PostMapping(path="/editInfo", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void editInfo(@RequestBody Course c) {
 		
-		System.out.println(c);
+		//System.out.println(c);
 		this.courseService.editInfo(c);
 	}
 	
