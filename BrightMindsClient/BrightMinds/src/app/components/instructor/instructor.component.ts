@@ -43,6 +43,9 @@ export class InstructorComponent implements OnInit {
     //For form error
     public bad:boolean = false;
 
+    //List of Approved courses
+    courseList:Course[];
+
 
   constructor(private instructorService:InstructorService, private router:Router) { }
 
@@ -130,13 +133,13 @@ export class InstructorComponent implements OnInit {
     this.instructorService.getMyActiveCourses(instructor)
       .subscribe(
         result =>{
-          console.log(result);
+          this.courseList = result;
+          console.log(this.courseList);
         },
         error =>{
 
         }
       )
-
   }
 
 }

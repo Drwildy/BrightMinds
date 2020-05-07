@@ -58,7 +58,7 @@ export class InstructorService {
 
   }
 
-  getMyActiveCourses(instructor: Instructor): Observable<Instructor[]> {
+  getMyActiveCourses(instructor: Instructor): Observable<Course[]> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     const body = JSON.stringify({
@@ -75,7 +75,7 @@ export class InstructorService {
       updatedAt: instructor.createdAt
     })   
 
-    return this.http.post<Instructor[]>('http://localhost:8080/BrightMinds/course/getMyActiveCourses', body, {headers:headers});
+    return this.http.post('http://localhost:8080/BrightMinds/course/getMyActiveCourses', body, {headers:headers}) as Observable<Course[]>;
 
   }
 }
