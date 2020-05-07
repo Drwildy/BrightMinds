@@ -1,7 +1,13 @@
-
- <h3>Registor For Courses </h3>
-<div *ngFor="let course of listofcourse">
-    <app-course [courseinfo]="course">
-    </app-course>
-    
+ <h1>Courses </h1>
+ <div id="coursesContainer" class="offset-1 bg-light-gray">
+  <div *ngFor="let course of coursesList">
+      <div id="courseCard" class="card col-mb-3 col-lg-3">
+        <h5 class="card-header">{{ course.title }}</h5>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-success float-right">Enroll NOW</a>
+        </div>
+      </div>
+  </div>
 </div>

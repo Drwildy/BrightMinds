@@ -1,0 +1,20 @@
+h1{
+    margin-top: 70px;
+    margin-left: 250px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: gray;
+    text-shadow: 3px 3px 2px midnightblue;
+}
+
+#adminInstructor{
+    margin-top: 6px;
+    padding: 8px;
+    box-shadow: 3px 3px 20px lightslategrey;
+}
+
+hr{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    color: blue;
+    width: 100%;
+}

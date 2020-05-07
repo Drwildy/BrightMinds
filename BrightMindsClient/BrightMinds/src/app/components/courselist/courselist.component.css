@@ -1,0 +1,17 @@
+h1{
+    margin-top: 70px;
+    margin-left: 250px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: gray;
+    text-shadow: 3px 3px 2px midnightblue;
+}
+
+#coursesContainer{
+    margin-top: 6px;
+    padding: 8px;
+}
+
+#courseCard{
+    float: left;
+    margin: 20px;
+}
