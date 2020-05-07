@@ -32,7 +32,8 @@ public class CourseController {
 	private InstructorService instructorService;
 
 	@Autowired
-	public CourseController(CourseService courseService, InstructorService instructorService, StudentService studentService) {
+	public CourseController(CourseService courseService, InstructorService instructorService,
+			StudentService studentService) {
 		this.courseService = courseService;
 		this.instructorService = instructorService;
 		this.studentService = studentService;
@@ -43,8 +44,8 @@ public class CourseController {
 		return "it is working";
 	}
 
-	@RequestMapping(path = "/listOfCourse",method = RequestMethod.GET)
-//	@GetMapping(path = "/listOfCourse")
+	@RequestMapping(path = "/listOfCourse", method = RequestMethod.GET)
+
 	public List<Course> getAllCourses() {
 		System.out.println();
 		List<Course> listOfCourse = courseService.getListOfCourse();
@@ -57,31 +58,32 @@ public class CourseController {
 
 		return null;
 	}
-	
-	@PostMapping(path="/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@PostMapping(path = "/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void addCourse(@RequestBody Course c) {
-		
+
 		System.out.println(c);
-		
+
 		Instructor instructor = this.instructorService.getById(c.getInstructorId().getId());
 		c.setInstructorId(instructor);
-		
+
 		System.out.println(c);
 		this.courseService.addCourse(c);
 	}
-	
-	@GetMapping(path="/pay")
-	public void payment(@RequestParam(name = "courseid") String courseId, @RequestParam(name = "studentid") String studentid, @RequestParam(name = "price") String price) {
-		int sid=Integer.parseInt(studentid);
+
+	@GetMapping(path = "/pay")
+	public void payment(@RequestParam(name = "courseid") String courseId,
+			@RequestParam(name = "studentid") String studentid, @RequestParam(name = "price") String price) {
+		int sid = Integer.parseInt(studentid);
 		Student student = studentService.getStudentById(sid);
 		Course course = courseService.getCourseById(Integer.parseInt(courseId));
-		if(student.getCourse()!=null) {
+		if (student.getCourse() != null) {
 			student.getCourse().add(course);
-		}else {
-			HashSet<Course> courses=new HashSet<>();
+		} else {
+			HashSet<Course> courses = new HashSet<>();
 			courses.add(course);
 			student.setCourse(courses);
-	}
+		}
 		studentService.updateStudent(student);
 	}
 

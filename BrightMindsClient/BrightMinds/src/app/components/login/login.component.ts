@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
           //this.var = sessionStorage.getItem("id");
 
           //Do some navigating to your Student page here.
-          //this.router.navigate(['student']);
+          this.router.navigate(['/student']);
           
         },
         error =>{

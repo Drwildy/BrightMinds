@@ -6,9 +6,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.brightminds.model.Course;
@@ -44,12 +46,16 @@ public class StudentController {
 		s.setCourse(courses);
 		s.setLesson(lessons);
 		s.setTest(tests);
-		
+
 		String username = s.getUserid().getUsername();
 		User user = this.userService.getByUsername(username);
 		s.setUserid(user);
 
 		this.studentService.insertStudent(s);
+	}
+	@PostMapping(path = "/update", consumes= MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void updateStudent(@RequestBody Student s) {
+		this.studentService.updateStudent(s);
 	}
 	
 	@PostMapping(path="/getStudent", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -57,6 +63,11 @@ public class StudentController {
 		
 		//Returns a student to the Angular
 		return this.studentService.getByUserId(u);
+	}
+	
+	@GetMapping(path = "/getStudent")
+	public Student getStudentById(@RequestParam("id")String id) {
+		return this.studentService.getStudentById(Integer.parseInt(id));	
 	}
 		
 }

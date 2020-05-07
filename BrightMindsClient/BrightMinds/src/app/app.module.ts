@@ -15,6 +15,8 @@ import { InstructorComponent } from './components/instructor/instructor.componen
 import { StudentComponent } from './components/student/student.component';
 import { FindClassesComponent } from './find-classes/find-classes.component';
 import { CourseregistrationComponent } from './components/courseregistration/courseregistration.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CourseregistrationComponent } from './components/courseregistration/cou
     InstructorComponent,
     StudentComponent,
     FindClassesComponent,
-    CourseregistrationComponent
+    CourseregistrationComponent,
+    DashboardComponent,
+    StudentcourseComponent
   ],
   imports: [
     BrowserModule,
