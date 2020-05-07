@@ -95,12 +95,12 @@ public class CourseRepositoryImp implements CourseRepository {
 		Transaction tx = null;
 
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			CriteriaBuilder cb = s.getCriteriaBuilder();
 			CriteriaQuery<Course> cq = cb.createQuery(Course.class);
 			Root<Course> root = cq.from(Course.class);
-			cq.select(root).where(cb.equal(root.get("courseId"), id));
+			cq.select(root).where(cb.equal(root.get("id"), id));
 			Query<Course> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
@@ -164,6 +164,41 @@ public class CourseRepositoryImp implements CourseRepository {
 		}
 		
 		return courses;
+	}
+
+	@Override
+	public void editInfo(Course c) {
+		Session s = null;
+		Transaction tx = null;
+		
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			
+			String HQL = "UPDATE Course c SET "
+					+ "title = :title, "
+					+ "hours = :hours, "
+					+ "price = :price, "
+					+ "description = :description "
+					+ "WHERE id = :id";
+			Query<Course> q = s.createQuery(HQL);
+			
+			q.setParameter("title", c.getTitle());
+			q.setParameter("hours", c.getHours());
+			q.setParameter("price", c.getPrice());
+			q.setParameter("description", c.getDescription());
+			q.setParameter("id", c.getId());
+			
+			q.executeUpdate();
+
+			tx.commit();
+		}catch(HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		}finally {
+			s.close();
+		}		
+		
 	}
 
 }

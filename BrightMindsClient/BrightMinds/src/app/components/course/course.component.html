@@ -10,15 +10,49 @@
 
 
 <div class="container">
+
+  <div *ngIf="type === 'Instructor'">
+
+    You are an Instructor
+
     <div class="card" style="width: 60%;">
-        <div class="card-body">
-          
-          <h5 class="card-text">{{courseinfo.title}}</h5>
-          <p class="card-text">{{courseinfo.description}}</p>
-          <p class="card-text">Hourse: {{courseinfo.hours}} | Price: {{courseinfo.price}} </p>
-          <a href="#" class="btn btn-primary">Register  </a>
-        </div>
+      <div class="card-body">
+        <h5 class="card-text">{{title}}</h5>
+        <p class="card-text">{{description}}</p>
+        <p class="card-text">Hours: {{hours}} | Price: {{price | currency}} </p>
+        <button class="btn btn-primary" (click)="editInfo()">Edit Information </button>
+        <button class="btn btn-danger" (click)=addUnit()>Add Unit</button>
       </div>
+    </div>
+
+    <div *ngIf="edit">
+      <form class="border border-light p-5" (ngSubmit)="editCourseInfo()" #courseForm="ngForm">
+        <div class="container">
+            <h1 class="mb-4 text-center">Your Information</h1>
+            <h4 class="mb-4 text-center">Edit your information Here:</h4>
+            <p>Title: {{title}}</p>
+            <input type="text" id="editFormTitle" class="form-control mb-4" placeholder="Title" [(ngModel)]="edittitle" name="titleInput" #titleInput="ngModel">
+            <p>Hours: {{hours}}</p>
+            <input type="number" id="editFormHours" class="form-control mb-4" placeholder="Hours" [(ngModel)]="edithours" name="hoursInput" #hoursInput="ngModel">
+            <p>Price: {{price}}</p>
+            <input type="number" id="editFormPrice" class="form-control mb-4" placeholder="Price" [(ngModel)]="editprice" name="priceInput" #priceInput="ngModel">
+            <p>Description: {{description}}</p>
+            <input type="text" id="editFormDescription" class="form-control mb-4" placeholder="Description" [(ngModel)]="editdescription" name="descriptionInput" #descriptionInput="ngModel">
+            <div class="text-center">
+                <button class="btn btn-success custom-btn my-4 text-center" type="submit">Edit Information</button>
+            </div>
+        </div>
+    </form>
+
+    </div>
+    
+  </div>
+
+  <div *ngIf="type === 'Student'">
+
+    You are a Student
+  </div>
+    
 </div>
 </section>
 </body>

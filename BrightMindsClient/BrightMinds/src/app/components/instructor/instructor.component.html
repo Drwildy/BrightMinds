@@ -57,9 +57,9 @@
             <div class="card-body">
               <h5 class="card-title"></h5>
               <p class="card-text">Hours: {{course.hours}}</p>
-              <p class="card-text">Price: {{course.price}}</p>
+              <p class="card-text">Price: {{course.price | currency}}</p>
               <p class="card-text">{{course.description}}</p>
-              <a routerLink="/course" class="btn btn-success float-right">View Course</a>
+              <button  class="btn btn-success float-right" (click)="navigateToCourse(course)">View Course</button>
             </div>
         </div>
      </div>
