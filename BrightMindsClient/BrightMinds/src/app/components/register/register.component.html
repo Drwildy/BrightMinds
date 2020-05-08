@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Bright Minds Login</title>
+</head>
+<body>
+    <form [formGroup]="formRegister" class="border border-light p-5" (ngSubmit)="register()">
+        <section class="skewedBox">
+            <div class="container">
+                <h1 class="mb-4 text-center">Bright Minds Register Account</h1>
+                <h4 class="mb-4 text-center">Slogan goes here...</h4>
+                
+                <p>Username</p>
+                <input type="text" id="registerFormUserName" class="form-control mb-4" placeholder="Username" [(ngModel)]="username" name="usernameInput" #usernameInput="ngModel" required [ngModelOptions]="{standalone: true}">
+                
+                <p>First Name</p>
+                <input type="text" id="registerFormFirstName" class="form-control mb-4" placeholder="First Name" [(ngModel)]="firstName" name="firstNameInput" #firstNameInput="ngModel" required [ngModelOptions]="{standalone: true}">
+
+                <p>Last Name</p>
+                <input type="text" id="registerFormLastName" class="form-control mb-4" placeholder="Last Name" [(ngModel)]="lastName" name="lastNameInput" #lastNameInput="ngModel" required [ngModelOptions]="{standalone: true}">
+               
+                <p>Phone Number</p>
+                <input type="tel" id="registerFormPhoneNumber" class="form-control mb-4" placeholder="555-555-5555" [(ngModel)]="phoneNumber" name="phoneNumberInput" #phoneNumberInput="ngModel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required [ngModelOptions]="{standalone: true}">
+                <small>Format: 555-555-5555</small>
+
+                <p>Address</p>
+                <input type="text" id="registerFormAddress" class="form-control mb-4" placeholder="Address" [(ngModel)]="address" name="addressInput" #addressInput="ngModel" required [ngModelOptions]="{standalone: true}">
+                
+                <p>Date of Birth</p>
+                <input type="date" id="registerFormDate" class="form-controll mb-4" [(ngModel)]="DOB" name="DOBInput" #DOBInput="ngModel" required [ngModelOptions]="{standalone: true}">
+
+                <!--<p>Password</p>-->
+                <div class="form-group">
+                    <label for="password" [ngClass]="formRegister.controls['password'].invalid ? 'text-danger' : ''">Password:</label>
+                    <input type="password" formControlName="password" [(ngModel)]="password" class="form-control mb-4" id="defaultLoginFormPassword password" placeholder="Password" [ngClass]="formRegister.controls['password'].invalid ? 'is-invalid' : ''">
+
+                    <label class="col" [ngClass]="formRegister.controls['password'].hasError('required') || formRegister.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                    Must be at least 8 characters!
+                    </label>
+
+                    <label class="col" [ngClass]="formRegister.controls['password'].hasError('required') || formRegister.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+                    Must contain at least 1 number!
+                    </label>
+
+                    <label class="col" [ngClass]="formRegister.controls['password'].hasError('required') || formRegister.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+                    Must contain at least 1 in Capital Case!
+                    </label>
+
+                    <label class="col" [ngClass]="formRegister.controls['password'].hasError('required') || formRegister.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+                    Must contain at least 1 Letter in Small Case!
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" [ngClass]="formRegister.controls['confirmPassword'].invalid ? 'text-danger' : ''">
+                    Confirm
+                    Password:
+                    </label>
+                    <input id="confirmPassword confirmLoginFormPassword" formControlName="confirmPassword" type="password" class="form-control mb-4" placeholder="Confirm Password" [ngClass]="formRegister.controls['confirmPassword'].invalid ? 'is-invalid' : ''" >
+                    <label class="text-danger" *ngIf="formRegister.controls['confirmPassword'].hasError('required')">
+                    Password is Required!
+                    </label>
+                    <label class="text-danger" *ngIf="formRegister.controls['confirmPassword'].hasError('NoPassswordMatch')">
+                    Password do not match
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button [disabled]="formRegister.invalid" class="btn btn-primary custom-btn my-4" type="submit" (click)="register">Create Account</button>
+                </div>
+            </div>
+        </section>
+    </form>
+</body>
+</html>

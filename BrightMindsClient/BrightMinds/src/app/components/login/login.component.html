@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Bright Minds Login</title>
+</head>
+<body>
+    <form class="border border-light p-5" (ngSubmit)="login()" #loginForm="ngForm">
+        <section class="skewedBox">
+            <div class="container">
+                <h1 class="mb-4 text-center">Bright Minds Login Portal</h1>
+                <h4 class="mb-4 text-center">Slogan goes here...</h4>
+                <input type="text" id="loginFormUserName" class="form-control mb-4" placeholder="Username" [(ngModel)]="username" name="usernameInput" #usernameInput="ngModel">
+                <input type="password" id="loginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="password" name="passwordInput" #passwordInput="ngModel">
+                <div *ngIf="bad" class="alert alert-danger">Username or Password incorrect</div>
+                <div class="text-center">
+                    <button class="btn btn-light custom-btn my-4 text-center" type="submit">Login</button>
+                </div>
+            
+                <div class="d-flex justify-content-between">
+                    <div class="text-center">
+                        <a href="./forgotPassword">Forgot Password</a>
+                    </div>
+                    <div class ="text-center">
+                        <a href="./register">Register Account</a>
+                    </div> 
+                </div>
+            </div>
+        </section>
+    </form>
+
+</body>
+</html>

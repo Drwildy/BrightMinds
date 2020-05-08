@@ -1,0 +1,45 @@
+h1{
+    margin-top: 80px;
+    margin-left: 250px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: gray;
+    text-shadow: 3px 3px 2px midnightblue;
+    }
+    
+   
+    
+    #tbar{
+        height: 80px;
+        width: 100%;
+        background-color: steelblue;
+        position: absolute;
+    }
+    
+  
+    
+   
+    
+    #tbarOpt{
+        float: right;
+        width: 800px;
+        padding-top: 20px;
+    }
+    
+    #tbarOpt>h1{
+        font-style: normal;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: white;
+        text-shadow: 3px 3px 2px black;
+        display: inline;
+        padding-right: 50px;
+    }
+    
+    #tbarOpt>a{
+        text-decoration: none;
+        margin: 0 5px;
+    }
+    
+    #tbarOpt>a>button{
+        margin-bottom: 20px;
+    }
+    
