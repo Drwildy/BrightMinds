@@ -78,4 +78,24 @@ export class InstructorService {
     return this.http.post('http://localhost:8080/BrightMinds/course/getMyActiveCourses', body, {headers:headers}) as Observable<Course[]>;
 
   }
+
+  newInstructor(instructor: Instructor){
+    let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    const body = JSON.stringify({
+    id: instructor.id,
+    userid: instructor.userId,
+    firstName: instructor.firstName,
+    lastName: instructor.lastName,
+    phoneNumber: instructor.phoneNumber,
+    address: instructor.address,
+    degree: instructor.degree,
+    dateOfBirth: instructor.DOB,
+    status: instructor.status,
+    createdAt: instructor.createdAt,
+    updatedAt: instructor.updatedAt
+  }) 
+
+  return this.http.post('http://localhost:8080/BrightMinds/admin/newInstructor', body, {headers: headers});
+
+}
 }

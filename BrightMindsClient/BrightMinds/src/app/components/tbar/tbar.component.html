@@ -1,0 +1,18 @@
+<header>
+    <nav class="navbar fixed-top">
+        <div id="tbarLogo"> 
+            <img src="./assets/images/logo.png">
+        </div>
+        <div id="tbarOpt">
+            <h1>Bright Minds</h1>
+            <a routerLink="/index"><button class="btn btn-light">Home</button></a>
+            <a routerLink="/adminInstructor"><button class="btn btn-light">Instructor</button></a>
+            <a routerLink="/courses"><button class="btn btn-light">Courses</button></a>
+            <a routerLink="/coursesmanage"><button class="btn btn-light">Manage Courses</button></a>        
+            <a routerLink="/login"><button class="btn btn-light" (click)="logout()">Logout</button></a>        
+
+            <!--<a><i class="fa fa-sign-out-alt"></i></a>-->
+        </div> 
+      </nav>        
+        <router-outlet></router-outlet>  
+</header>
