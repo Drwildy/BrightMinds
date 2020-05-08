@@ -20,17 +20,17 @@ import com.brightminds.model.Student;
 import com.brightminds.model.User;
 import com.brightminds.util.HibernateConfiguration;
 
-@Repository(value ="studentRepository")
+@Repository(value = "studentRepository")
 @Transactional
-public class StudentRepositoryImp implements StudentRepository{
+public class StudentRepositoryImp implements StudentRepository {
 
 	private SessionFactory sessionFactory;
-	
+
 	@Autowired
 	public StudentRepositoryImp(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@Override
 	public void insert(Student a) {
 		Session s = null;
@@ -40,24 +40,35 @@ public class StudentRepositoryImp implements StudentRepository{
 			tx = s.beginTransaction();
 			s.save(a);
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
-		}	
+		}
 	}
 
 	@Override
 	public void update(Student a) {
-		// TODO Auto-generated method stub
-		
+		Session s = null;
+		Transaction tx = null;
+		try {
+			s = sessionFactory.openSession();
+			tx = s.beginTransaction();
+			s.save(a);
+			tx.commit();
+		} catch (HibernateException e) {
+			tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
 	}
 
 	@Override
 	public void delete(int a) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -65,16 +76,16 @@ public class StudentRepositoryImp implements StudentRepository{
 		List<Student> student = new ArrayList<>();
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			student = s.createNativeQuery("select * from student", Student.class).list();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
 		return student;
@@ -85,24 +96,24 @@ public class StudentRepositoryImp implements StudentRepository{
 		Student p = null;
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
-			s = HibernateConfiguration.getSession();
+			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Student> cq = cb.createQuery(Student.class); 
-			Root<Student> root = cq.from(Student.class); 
-			cq.select(root).where(cb.equal(root.get("studentId"), id));
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<Student> cq = cb.createQuery(Student.class);
+			Root<Student> root = cq.from(Student.class);
+			cq.select(root).where(cb.equal(root.get("id"), id));
 			Query<Student> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
-		
+
 		return p;
 	}
 
@@ -111,24 +122,24 @@ public class StudentRepositoryImp implements StudentRepository{
 		Student p = null;
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
 			s = HibernateConfiguration.getSession();
 			tx = s.beginTransaction();
-			CriteriaBuilder cb = s.getCriteriaBuilder(); 
-			CriteriaQuery<Student> cq = cb.createQuery(Student.class); 
-			Root<Student> root = cq.from(Student.class); 
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<Student> cq = cb.createQuery(Student.class);
+			Root<Student> root = cq.from(Student.class);
 			cq.select(root).where(cb.equal(root.get("firstname"), name));
 			Query<Student> q = s.createQuery(cq);
 			p = q.getSingleResult();
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
-		
+
 		return p;
 	}
 
@@ -137,24 +148,24 @@ public class StudentRepositoryImp implements StudentRepository{
 		Student student = null;
 		Session s = null;
 		Transaction tx = null;
-		
+
 		try {
 			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
-			
+
 			String HQL = "FROM Student s WHERE userid = :userId";
 			Query<Student> q = s.createQuery(HQL, Student.class);
 			q.setParameter("userId", userId);
 			student = q.getSingleResult();
 
 			tx.commit();
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		}finally {
+		} finally {
 			s.close();
 		}
-		
+
 		return student;
 	}
 

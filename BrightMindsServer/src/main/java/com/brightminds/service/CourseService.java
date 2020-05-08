@@ -53,4 +53,5 @@ public class CourseService {
 	public void editInfo(Course c) {
 		this.courseRepository.editInfo(c);
 	}
+
 }

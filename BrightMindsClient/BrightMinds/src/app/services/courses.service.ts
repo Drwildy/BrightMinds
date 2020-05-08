@@ -19,6 +19,13 @@ coursesList
     return this.http.get('http://localhost:8080/BrightMinds/course/listOfCourse')as Observable<Course[]>;
   }
 
+
+  payment(courseid,studentid,price):Observable<any>{
+    // return this.coursesList
+    return this.http.get('http://localhost:8080/BrightMinds/course/pay?courseid='+courseid+"&&studentid="+studentid+"&&price="+price)as Observable<any>;
+  }
+
+
   getCourseById(courseId: number): Observable<Course>{ 
     let headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     const body = JSON.stringify({
@@ -44,6 +51,7 @@ coursesList
 
     return this.http.post('http://localhost:8080/BrightMinds/course/editInfo', body, {headers:headers});
   }
+
    
   
 }

@@ -1,7 +1,17 @@
-
+<div id="tbar" class="fixed-top">
+    
+    <div id="tbarOpt">
+        <h1>Bright Minds</h1>
+        <a routerLink="/index"><button class="btn btn-light">Home</button></a>
+        <a [routerLink]="['/student']"><button class="btn btn-light">Profile</button></a>
+        <a [routerLink]="['/login']"><button class="btn btn-light">Logout</button></a>        
+        <a><i class="fas fa-sign-out-alt"></i></a>
+    </div> 
+    <router-outlet></router-outlet> 
+</div>
  <h3>Registor For Courses </h3>
 <div *ngFor="let course of listofcourse">
-    <app-course [courseinfo]="course">
-    </app-course>
+    <app-studentcourse [courseinfo]="course">
+    </app-studentcourse>
     
 </div>

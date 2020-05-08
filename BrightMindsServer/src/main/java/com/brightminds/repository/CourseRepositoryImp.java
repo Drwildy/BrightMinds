@@ -34,12 +34,12 @@ public class CourseRepositoryImp implements CourseRepository {
 
 	@Override
 	public void insert(Course a) {
-		// TODO Auto-generated method stub
+
 		try {
 			Session s = null;
 			Transaction tx = null;
 			try {
-				// s = HibernateConfiguration.getSession();
+
 				s = sessionFactory.openSession();
 				tx = s.beginTransaction();
 				s.save(a);
@@ -74,7 +74,7 @@ public class CourseRepositoryImp implements CourseRepository {
 		Transaction tx = null;
 
 		try {
-//			s = HibernateConfiguration.getSession();
+
 			s = sessionFactory.openSession();
 			tx = s.beginTransaction();
 			course = s.createNativeQuery("select * from course", Course.class).list();
@@ -107,8 +107,6 @@ public class CourseRepositoryImp implements CourseRepository {
 		} catch (HibernateException e) {
 			tx.rollback();
 			e.printStackTrace();
-		} finally {
-			s.close();
 		}
 
 		return p;

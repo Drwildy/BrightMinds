@@ -12,6 +12,11 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { CourseComponent } from './components/course/course.component';
 import { CourselistComponent } from './components/courselist/courselist.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
+import { StudentComponent } from './components/student/student.component';
+import { FindClassesComponent } from './find-classes/find-classes.component';
+import { CourseregistrationComponent } from './components/courseregistration/courseregistration.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { InstructorComponent } from './components/instructor/instructor.componen
     ForgotPasswordComponent,
     CourseComponent,
     CourselistComponent,
-    InstructorComponent
+    InstructorComponent,
+    StudentComponent,
+    FindClassesComponent,
+    CourseregistrationComponent,
+    DashboardComponent,
+    StudentcourseComponent
   ],
   imports: [
     BrowserModule,

@@ -14,20 +14,7 @@ h1{
         background-color: steelblue;
         position: absolute;
     }
-    
-    #tbarLogo{
-        margin: 0;
-        padding-left: 20px;
-        min-width: 280px;
-        display: inline;
-    }
-    
-    #tbarLogo>img{
-        margin-top: 12px;
-        position: fixed;
-        height: 100px;
-        width: 200px;
-    }
+  
     
     #tbarOpt{
         float: right;
@@ -41,7 +28,7 @@ h1{
         color: white;
         text-shadow: 3px 3px 2px black;
         display: inline;
-        padding-right: 50px;
+        padding-right: 20px;
     }
     
     #tbarOpt>a{
@@ -51,5 +38,14 @@ h1{
     
     #tbarOpt>a>button{
         margin-bottom: 20px;
+        padding: 6px;
     }
-    
+    .container{
+        width:100%;
+        margin-top:81px;
+        background-color:  rgb(221, 191, 191);
+    }
+    .skewedBox{
+        background-color:  rgb(221, 191, 191);
+        height: 900px;
+    }
