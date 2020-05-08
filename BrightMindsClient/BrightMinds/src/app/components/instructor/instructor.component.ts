@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/course';
 import { InstructorService } from 'src/app/services/instructor.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Instructor } from 'src/app/models/Instructor';
 
 @Component({
@@ -11,14 +11,24 @@ import { Instructor } from 'src/app/models/Instructor';
 })
 export class InstructorComponent implements OnInit {
 
-    //Display and change your own information
+    //Display your own info
     public instid:number;
     public firstName:string;
     public lastName:string;
     public phoneNumber:string;
     public address:string;
-    public DOB:number;
+    public DOB:string;
     public degree:string;
+    public type:string;
+
+    //Edit your info
+    public editinstid:number;
+    public editfirstName:string;
+    public editlastName:string;
+    public editphoneNumber:string;
+    public editaddress:string;
+    public editDOB:Date;
+    public editdegree:string;
 
     //For adding courses
     public id:number
@@ -34,29 +44,37 @@ export class InstructorComponent implements OnInit {
     //For form error
     public bad:boolean = false;
 
+    //List of Approved courses
+    courseList:Course[];
+
 
   constructor(private instructorService:InstructorService, private router:Router) { }
 
   ngOnInit(): void {
 
     //Perform auth check first?
-
-    this.instid = Number(sessionStorage.getItem("id"));
-    this.firstName = sessionStorage.getItem("First Name");
-    this.lastName = sessionStorage.getItem("Last Name");
-    this.phoneNumber = sessionStorage.getItem("Phone Number");
-    this.address = sessionStorage.getItem("Address");
-    this.DOB = Number(sessionStorage.getItem("DOB"));
-    this.degree = sessionStorage.getItem("Degree");
-
-
+    this.type = sessionStorage.getItem("Type");
+    if(this.type != "Instructor"){
+      this.router.navigate([""]);
+    }else{
+      this.instid = Number(sessionStorage.getItem("id"));
+      this.firstName = sessionStorage.getItem("First Name");
+      this.lastName = sessionStorage.getItem("Last Name");
+      this.phoneNumber = sessionStorage.getItem("Phone Number");
+      this.address = sessionStorage.getItem("Address");
+      this.DOB = sessionStorage.getItem("DOB");
+      this.degree = sessionStorage.getItem("Degree");
+  
+      this.getMyActiveCourses();
+    }
   }
 
   registerCourse(): void{
 
     this.instructorId = this.instid;
-    let instructor = new Instructor(this.instructorId, null, null, null, null, null, null, null, null, null, null);
+    let instructor = new Instructor(this.instid, null, null, null, null, null, null, null, null, null, null);
     let course = new Course(0, instructor, this.hours, this.price, this.title, this.description, 1, null, null);
+
 
     this.instructorService.registerCourse(course)
     .subscribe(
@@ -67,8 +85,83 @@ export class InstructorComponent implements OnInit {
 
       }
     );
+  }
 
-    console.log("Course: ", course);
+  editInfo(): void{
+
+    let date = new Date(this.editDOB).getTime();
+    let instructor = new Instructor(this.instid, null, this.editfirstName, this.editlastName, this.editphoneNumber, 
+      this.editaddress, date, this.editdegree, null, null, null);
+
+    this.instructorService.editInfo(instructor)
+    .subscribe(
+      result =>{
+
+        this.populateSessionStorage();
+
+      },
+      error =>{
+
+      }
+    );
+
+  }
+
+  populateSessionStorage():void{
+
+        //sessionStorage.setItem("id", this.editid);
+        sessionStorage.setItem("First Name", this.editfirstName);
+        sessionStorage.setItem("Last Name", this.editlastName);
+        sessionStorage.setItem("Address", this.editaddress);
+        sessionStorage.setItem("Phone Number", this.editphoneNumber);
+        sessionStorage.setItem("DOB", new Date(this.editDOB).toString());
+        sessionStorage.setItem("Degree", this.editdegree);
+        //sessionStorage.setItem("Type", "Instructor");
+
+        //reinitialize
+        this.instid = Number(sessionStorage.getItem("id"));
+        this.firstName = sessionStorage.getItem("First Name");
+        this.lastName = sessionStorage.getItem("Last Name");
+        this.phoneNumber = sessionStorage.getItem("Phone Number");
+        this.address = sessionStorage.getItem("Address");
+        this.DOB = sessionStorage.getItem("DOB");
+        this.degree = sessionStorage.getItem("Degree");
+  }
+
+  getMyActiveCourses():void{
+
+    let date = new Date(this.DOB).getTime();
+    let instructor = new Instructor(this.instid, null, this.firstName, this.lastName, this.phoneNumber, 
+      this.address, date, this.degree, null, null, null);
+
+    this.instructorService.getMyActiveCourses(instructor)
+      .subscribe(
+        result =>{
+          this.courseList = result;
+          ///console.log(this.courseList);
+        },
+        error =>{
+
+        }
+      )
+  }
+
+  navigateToCourse(course: Course):void {
+    
+    let courseDetails: NavigationExtras = {
+      queryParams: {
+        "id": course.id,
+        "title": course.title,
+        "instructor": course.instructorId,
+        "hours": course.hours,
+        "price": course.price,
+        "description": course.description,
+        "course": course
+      }
+    }
+    
+    this.router.navigate(["/course"], courseDetails);
+
   }
 
 }

@@ -29,5 +29,12 @@ public class InstructorController {
 
 		return this.instructorService.getByUserId(u);
 	}
+	
+	@PostMapping(path="/editInfo", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void editInfo(@RequestBody Instructor i) {
+		System.out.println(i);
+		
+		this.instructorService.editInfo(i);
+	}
 
 }

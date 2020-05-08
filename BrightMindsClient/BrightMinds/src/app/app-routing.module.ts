@@ -12,6 +12,8 @@ import { CourseregistrationComponent } from './components/courseregistration/cou
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
 
+import { CourseComponent } from './components/course/course.component';
+
 
 
 const routes: Routes = [
@@ -35,6 +37,10 @@ const routes: Routes = [
   {
     component: CourselistComponent,
     path: "courses"
+  },
+  {
+    component: CourseComponent,
+    path: "course"
   },
   {
     component: InstructorComponent,

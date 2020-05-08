@@ -58,20 +58,8 @@ public class CourseController {
 
 		return null;
 	}
-
-	@PostMapping(path = "/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void addCourse(@RequestBody Course c) {
-
-		System.out.println(c);
-
-		Instructor instructor = this.instructorService.getById(c.getInstructorId().getId());
-		c.setInstructorId(instructor);
-
-		System.out.println(c);
-		this.courseService.addCourse(c);
-	}
-
-	@GetMapping(path = "/pay")
+  
+  @GetMapping(path = "/pay")
 	public void payment(@RequestParam(name = "courseid") String courseId,
 			@RequestParam(name = "studentid") String studentid, @RequestParam(name = "price") String price) {
 		int sid = Integer.parseInt(studentid);
@@ -86,5 +74,39 @@ public class CourseController {
 		}
 		studentService.updateStudent(student);
 	}
+
+	@PostMapping(path = "/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void addCourse(@RequestBody Course c) {
+    
+		Instructor instructor = this.instructorService.getById(c.getInstructorId().getId());
+		c.setInstructorId(instructor);
+		
+		this.courseService.addCourse(c);
+	}
+
+	//getMyActiveCourses
+	@PostMapping(path="/getMyActiveCourses", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Course> getActiveCoursesById(@RequestBody Instructor i) {
+		
+		Instructor instructor = this.instructorService.getById(i.getId());
+		
+		return this.courseService.getMyCoursesById(instructor);
+		
+	}
+	
+	
+	@PostMapping(path="/getCourseById", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Course getCourseById(@RequestBody Course c) {
+		
+		return this.courseService.getCourseById(c.getId());
+	}
+	
+	@PostMapping(path="/editInfo", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public void editInfo(@RequestBody Course c) {
+		
+		//System.out.println(c);
+		this.courseService.editInfo(c);
+	}
+	
 
 }
