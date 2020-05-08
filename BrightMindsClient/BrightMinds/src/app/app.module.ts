@@ -16,6 +16,11 @@ import { StudentComponent } from './components/student/student.component';
 import { CourseregistrationComponent } from './components/courseregistration/courseregistration.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
+import { IndexComponent } from './components/index/index.component';
+import { AdminCourseManageComponent } from './components/admin-course-manage/admin-course-manage.component';
+import { AdminInstructorComponent } from './components/admin-instructor/admin-instructor.component';
+import { TbarComponent } from './components/tbar/tbar.component';
+import { IndexFooterComponent } from './components/index-footer/index-footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,12 @@ import { StudentcourseComponent } from './components/studentcourse/studentcourse
     StudentComponent,
     CourseregistrationComponent,
     DashboardComponent,
-    StudentcourseComponent
+    StudentcourseComponent,
+    IndexComponent,
+    AdminCourseManageComponent,
+    AdminInstructorComponent,
+    TbarComponent,
+    IndexFooterComponent
   ],
   imports: [
     BrowserModule,

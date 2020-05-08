@@ -1,20 +1,20 @@
 h1 {
-	color:white;
+	color:black;
 	font-weight: bold;
 }
 
 h4 {
-	color:white;
+	color:black;
 	font-weight: lighter;
 }
 
 label {
-	color:White;
+	color:black;
 	font-weight: lighter;
 }
 
 .skewedBox {
-	background-image: linear-gradient(to right, #DE6262, #FFB88C);
+	background-image: linear-gradient(to right,  white, steelblue);
 	width: 100%;
 	padding: 200px 0;
 	transform: skew(0deg, -20deg) translateY(-180px);

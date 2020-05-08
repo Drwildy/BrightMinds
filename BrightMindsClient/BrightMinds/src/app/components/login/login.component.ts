@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
          sessionStorage.setItem("Type", "Admin");
  
          //Do some navigating to your Student page here.
-         //this.router.navigate(['admin']);
+         this.router.navigate(['adminInstructor']);
       },
       error =>{
         console.log(error);

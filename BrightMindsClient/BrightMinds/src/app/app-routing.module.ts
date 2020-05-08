@@ -13,13 +13,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
 
 import { CourseComponent } from './components/course/course.component';
+import { IndexComponent } from './components/index/index.component';
+import { AdminInstructorComponent } from './components/admin-instructor/admin-instructor.component';
+import { AdminCourseManageComponent } from './components/admin-course-manage/admin-course-manage.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/index',
     pathMatch: 'full'
   },
   {
@@ -50,10 +53,6 @@ const routes: Routes = [
     component: StudentComponent,
     path: "student"
   },
-  // {
-  //   component: FindClassesComponent,
-  //   path: "find-classes"
-  // },
   {
     path: "courseregistration",
     component: CourseregistrationComponent
@@ -65,6 +64,18 @@ const routes: Routes = [
   {
     path:"studentcourse",
     component: StudentcourseComponent
+  },
+  {
+    path:"index",
+    component: IndexComponent
+  },
+  {
+    path:"adminInstructor",
+    component: AdminInstructorComponent
+  },
+  {
+    path:"coursesmanage",
+    component: AdminCourseManageComponent
   }
 
 ]
