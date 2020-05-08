@@ -1,0 +1,46 @@
+<h1>Create Instructor</h1>
+<form id="adminInstructor" class="border border-light col-md-8 offset-2 bg-light" (ngSubmit)="newInstructor()" >
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="instructorFirstname">Firstname</label>
+            <input type="text" class="form-control" name="instructorFirstname"  id="instructorFirstname" placeholder="Firstname">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="instructorLastname">Lastname</label>
+            <input type="text" class="form-control" name="instructorLastname" id="instructorLastname" placeholder="Lastname">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="instructorPhone">Phone Number</label>
+            <input type="text" class="form-control" name="instructorPhone"  id="instructorPhone" placeholder="Phone">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="instructorAddress">Address</label>
+            <input type="text" class="form-control" name="instructorAddress" id="instructorAddress" placeholder="Address">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="instructorDegree">Degree</label>
+            <input type="text" class="form-control" name="instructorDegree" id="instructorDegree" placeholder="Degree">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="instructorDOB">Date Of Birth</label>
+            <input type="text" class="form-control" name="instructorDOB" id="instructorDOB" placeholder="Date Of Birth">
+          </div>
+          <hr>
+          <div class="form-group col-md-4">
+            <label for="instructorUsername">Username</label>
+            <input type="text" class="form-control" name="instructorUsername" id="instructorUsername" placeholder="Username">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="instructorPassword">Password</label>
+            <input type="password" class="form-control" name="instructorUsername" id="instructorPassword" placeholder="Password">
+          </div> 
+          <div class="form-group col-md-4">
+            <label for="instructorPasswordConfirm">Password Comfirm</label>
+            <input type="password" class="form-control" name="instructorPasswordConfirm" id="instructorPasswordConfirm" placeholder="Confirm Password">
+          </div>   
+    </div>
+
+    <div class="alert alert-danger">Something is WRONG</div>
+       
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

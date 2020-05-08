@@ -1,32 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterComponent } from './components/register/register.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { CourseComponent } from './components/course/course.component';
-import { CourselistComponent } from './components/courselist/courselist.component';
+import { AppComponent } from './app.component';
+
+
+import { TbarComponent } from './components/tbar/tbar.component';
+import { IndexComponent } from './components/index/index.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
+import { CourselistComponent } from './components/courselist/courselist.component';
+import { CourseComponent } from './components/course/course.component';
+import { AdminCourseManageComponent } from './components/admin-course-manage/admin-course-manage.component';
+import { IndexFooterComponent } from './components/index-footer/index-footer.component';
+import { IndexInstructorComponent } from './components/index-instructor/index-instructor.component';
+import { AdminInstructorComponent } from './components/admin-instructor/admin-instructor.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    ForgotPasswordComponent,
-    CourseComponent,
+    TbarComponent,
+    IndexComponent,
+    InstructorComponent,
     CourselistComponent,
-    InstructorComponent
+    CourseComponent,
+    AdminCourseManageComponent,
+    IndexFooterComponent,
+    IndexInstructorComponent,
+    AdminInstructorComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
+    AppRoutingModule,
     HttpClientModule,
     AppRoutingModule
   ],

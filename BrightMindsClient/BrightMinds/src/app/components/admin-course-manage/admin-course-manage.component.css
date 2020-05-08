@@ -6,15 +6,12 @@ h1{
     text-shadow: 3px 3px 2px midnightblue;
 }
 
-#adminInstructor{
+#coursesContainer{
     margin-top: 6px;
-    padding: 8px;
-    box-shadow: 3px 3px 20px lightslategrey;
+    padding: 10px;
 }
 
-hr{
-    margin-top: 4px;
-    margin-bottom: 4px;
-    color: blue;
-    width: 100%;
+#coursesContainer>table{
+    width: 96%;
 }
+

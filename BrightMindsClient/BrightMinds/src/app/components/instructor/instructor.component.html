@@ -1,70 +1,46 @@
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>{firstName}'s' Home Page</title>
-</head>
-<body>
-    <form class="border border-light p-5" (ngSubmit)="registerCourse()" #courseForm="ngForm">
-        <div class="container">
-            <h1 class="mb-4 text-center">Add Course</h1>
-            <h4 class="mb-4 text-center">Please Enter your course information here...</h4>
-            <p>Name of Course:</p>
-            <input type="text" id="courseFormTitle" class="form-control mb-4" placeholder="Title" [(ngModel)]="title" name="usernameInput" #titleInput="ngModel">
-            <p>Hours:</p>
-            <input type="number" id="courseFormHours" class="form-control mb-4" placeholder="0" [(ngModel)]="hours" name="passwordInput" #hoursInput="ngModel">
-            <p>Price:</p>
-            <input type="number" id="courseFormPrice" class="form-control mb-4" placeholder="0" [(ngModel)]="price" name="usernameInput" #priceInput="ngModel">
-            <p>Short Description:</p>
-            <input type="text" id="courseFormDescription" class="form-control mb-4" placeholder="Write your Description here" [(ngModel)]="description" name="usernameInput" #desciptionInput="ngModel">
-
-            <div *ngIf="bad" class="alert alert-danger">Something is WRONG</div>
-            <div class="text-center">
-                <button class="btn btn-success custom-btn my-4 text-center" type="submit">Add Course</button>
-            </div>
+    <h1>Create Instructor</h1>
+    <form id="adminInstructor" class="border border-light col-md-8 offset-2 bg-light" >
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="instructorFirstname">Firstname</label>
+                <input type="text" class="form-control" id="instructorFirstname" placeholder="Firstname">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="instructorLastname">Lastname</label>
+                <input type="text" class="form-control" id="instructorLastname" placeholder="Lastname">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="instructorPhone">Phone Number</label>
+                <input type="text" class="form-control" id="instructorPhone" placeholder="Phone">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="instructorAddress">Address</label>
+                <input type="text" class="form-control" id="instructorAddress" placeholder="Address">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="instructorDegree">Degree</label>
+                <input type="text" class="form-control" id="instructorDegree" placeholder="Degree">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="instructorDOB">Date Of Birth</label>
+                <input type="text" class="form-control" id="instructorDOB" placeholder="Date Of Birth">
+              </div>
+              <hr>
+              <div class="form-group col-md-4">
+                <label for="instructorUsername">Username</label>
+                <input type="text" class="form-control" id="instructorUsername" placeholder="Username">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="instructorPassword">Password</label>
+                <input type="password" class="form-control" id="instructorPassword" placeholder="Password">
+              </div> 
+              <div class="form-group col-md-4">
+                <label for="instructorPasswordConfirm">Password Comfirm</label>
+                <input type="password" class="form-control" id="instructorPasswordConfirm" placeholder="Confirm Password">
+              </div>   
         </div>
+
+        <div class="alert alert-danger">Something is WRONG</div>
+           
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
-
-
-    <form class="border border-light p-5" (ngSubmit)="editInfo()" #courseForm="ngForm">
-        <div class="container">
-            <h1 class="mb-4 text-center">Your Information</h1>
-            <h4 class="mb-4 text-center">Edit your information Here:</h4>
-            <p>First Name: {{firstName}}</p>
-            <input type="text" id="infoFormFirstName" class="form-control mb-4" placeholder="First Name" [(ngModel)]="editfirstName" name="firstNameInput" #firstNameInput="ngModel">
-            <p>Last Name: {{lastName}}</p>
-            <input type="text" id="infoFormLastName" class="form-control mb-4" placeholder="Last Name" [(ngModel)]="editlastName" name="lastNameInput" #lastNameInput="ngModel">
-            <p>Phone Number: {{phoneNumber}}</p>
-            <input type="tel" id="infoFormPhoneNumber" class="form-control mb-4" placeholder="555-555-5555" [(ngModel)]="editphoneNumber" name="phoneNumberInput" #phoneNumberInput="ngModel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
-            <p>Address: {{address}}</p>
-            <input type="text" id="infoFormAddress" class="form-control mb-4" placeholder="Address" [(ngModel)]="editaddress" name="addressInput" #addressInput="ngModel">
-            <p>Date Of Birth: {{DOB}}</p>
-            <input type="date" id="infoFormDate" class="form-controll mb-4" [(ngModel)]="editDOB" name="DOBInput" #DOBInput="ngModel" required>
-            <p>Degree: {{degree}}</p>
-            <input type="text" id="infoFormDegree" class="form-control mb-4" placeholder="Degree" [(ngModel)]="editdegree" name="degreeInput" #degreeInput="ngModel">
-            
-            <div *ngIf="bad" class="alert alert-danger">Something is WRONG</div>
-            <div class="text-center">
-                <button class="btn btn-success custom-btn my-4 text-center" type="submit">Edit Information</button>
-            </div>
-        </div>
-    </form>
-
-    <h1>Courses </h1>
-    <div id="coursesContainer" class="offset-1 bg-light-gray">
-     <div *ngFor="let course of courseList">
-        <div id="courseCard" class="card col-mb-3 col-lg-3">
-            <h5 class="card-header">{{ course.title }}</h5>
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">Hours: {{course.hours}}</p>
-              <p class="card-text">Price: {{course.price}}</p>
-              <p class="card-text">{{course.description}}</p>
-              <a routerLink="/course" class="btn btn-success float-right">View Course</a>
-            </div>
-        </div>
-     </div>
-   </div>
-
-</body>
-</html>
-

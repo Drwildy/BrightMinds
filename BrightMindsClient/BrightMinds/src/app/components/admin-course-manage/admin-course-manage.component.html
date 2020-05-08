@@ -1,0 +1,36 @@
+<h1>Manage Courses </h1>
+<div id="coursesContainer" class="offset-1 bg-light-gray">
+    <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th scope="col" >Title</th>
+            <th scope="col" >Hours</th>
+            <th scope="col" >Cost</th>
+            <th scope="col" >Description</th>
+            <th scope="col" colspan="2" >Manage</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of coursesList">
+                <th scope="row" >
+                    {{ course.title }}
+                </th>
+                <td>
+                    {{ course.hours }}
+                </td>
+                <td>
+                    {{ course.price }}
+                </td>
+                <td>
+                    {{ course.description }}
+                </td>
+                <td>
+                    <button id="btnApprove" class="btn btn-success" (click)="approve(course, 2)"> Approve </button>
+                </td>
+                <td>
+                    <button id="btnDeny" class="btn btn-danger" (click)="approve(course, 9)"> Deny </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>        
+</div>
