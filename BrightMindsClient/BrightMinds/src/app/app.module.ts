@@ -13,7 +13,6 @@ import { CourseComponent } from './components/course/course.component';
 import { CourselistComponent } from './components/courselist/courselist.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { StudentComponent } from './components/student/student.component';
-import { FindClassesComponent } from './find-classes/find-classes.component';
 import { CourseregistrationComponent } from './components/courseregistration/courseregistration.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
@@ -28,7 +27,6 @@ import { StudentcourseComponent } from './components/studentcourse/studentcourse
     CourselistComponent,
     InstructorComponent,
     StudentComponent,
-    FindClassesComponent,
     CourseregistrationComponent,
     DashboardComponent,
     StudentcourseComponent

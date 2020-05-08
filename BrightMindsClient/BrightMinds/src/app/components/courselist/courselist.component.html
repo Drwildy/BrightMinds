@@ -4,7 +4,7 @@
         <h1>Bright Minds</h1>
         <a routerLink="/index"><button class="btn btn-light">Home</button></a>
         <a [routerLink]="['/student']"><button class="btn btn-light">Profile</button></a>
-        <a [routerLink]="['/login']"><button class="btn btn-light">Logout</button></a>        
+        <a [routerLink]="['/login']"><button class="btn btn-light" (click)="logout()">Logout</button></a>     
         <a><i class="fas fa-sign-out-alt"></i></a>
     </div> 
     <router-outlet></router-outlet> 

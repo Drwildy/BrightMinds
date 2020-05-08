@@ -62,17 +62,19 @@ public class CourseController {
   @GetMapping(path = "/pay")
 	public void payment(@RequestParam(name = "courseid") String courseId,
 			@RequestParam(name = "studentid") String studentid, @RequestParam(name = "price") String price) {
-		int sid = Integer.parseInt(studentid);
-		Student student = studentService.getStudentById(sid);
-		Course course = courseService.getCourseById(Integer.parseInt(courseId));
-		if (student.getCourse() != null) {
-			student.getCourse().add(course);
-		} else {
-			HashSet<Course> courses = new HashSet<>();
-			courses.add(course);
-			student.setCourse(courses);
-		}
-		studentService.updateStudent(student);
+		
+//	  int sid = Integer.parseInt(studentid);
+//		Student student = studentService.getStudentById(sid);
+//		Course course = courseService.getCourseById(Integer.parseInt(courseId));
+//		if (student.getCourse() != null) {
+//			student.getCourse().add(course);
+//		} else {
+//			HashSet<Course> courses = new HashSet<>();
+//			courses.add(course);
+//			student.setCourse(courses);
+//		}
+		System.out.println("commented out due to a bug");
+		//studentService.updateStudent(student);
 	}
 
 	@PostMapping(path = "/registerCourse", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -107,6 +109,5 @@ public class CourseController {
 		//System.out.println(c);
 		this.courseService.editInfo(c);
 	}
-	
-
+		
 }
