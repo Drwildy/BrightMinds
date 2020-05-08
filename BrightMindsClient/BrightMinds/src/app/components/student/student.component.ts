@@ -31,7 +31,6 @@ export class StudentComponent implements OnInit {
 
   constructor(private studentService:StudentService,private router:Router)  { }
   ngOnInit(): void {
-    debugger
     this.firstName = sessionStorage.getItem("First Name");
     this.lastName = sessionStorage.getItem("Last Name");
     this.phoneNumber = sessionStorage.getItem("Phone Number");
@@ -44,13 +43,13 @@ export class StudentComponent implements OnInit {
       let date = new Date(this.editDOB).getTime();
       let student= new Student(this.editid, null, this.editlastName, this.editfirstName, this.editaddress, this.editphoneNumber, null, null, null, null)
       console.log(student);
- this.studentService.update(student).subscribe(result => {
-   this.populateSessionStorage();
- },
- error =>{
+      this.studentService.update(student).subscribe(result => {
+        this.populateSessionStorage();
+        },
+        error =>{
 
- }
- );
+        }
+      );
 }
 
 
@@ -70,4 +69,10 @@ debugger
      //this.id = Number(sessionStorage.getItem("id"));
     
 }
+
+logout():void{
+  sessionStorage.clear();
+  this.router.navigate[('/login')];
+}
+
 }

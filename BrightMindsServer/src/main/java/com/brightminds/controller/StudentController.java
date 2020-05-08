@@ -55,7 +55,8 @@ public class StudentController {
 	}
 	@PostMapping(path = "/update", consumes= MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void updateStudent(@RequestBody Student s) {
-		this.studentService.updateStudent(s);
+		System.out.println("commented out due to bug adding multiple times");
+		//this.studentService.updateStudent(s);
 	}
 	
 	@PostMapping(path="/getStudent", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)

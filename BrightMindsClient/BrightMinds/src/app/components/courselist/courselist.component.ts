@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import { Course } from 'src/app/models/course';
 import { CoursesService } from 'src/app/services/courses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courselist',
@@ -10,7 +11,7 @@ import { CoursesService } from 'src/app/services/courses.service';
 })
 export class CourselistComponent implements OnInit {
   listofcourse:Course[]
-  constructor(private courseservice:CoursesService) { }
+  constructor(private courseservice:CoursesService, private router:Router) { }
 
   ngOnInit(): void {
     this.courseservice.getCourses().subscribe(
@@ -19,6 +20,11 @@ export class CourselistComponent implements OnInit {
         
       this.listofcourse=result
     })
+  }
+
+  logout():void{
+    sessionStorage.clear();
+    this.router.navigate[('')];
   }
 
 }

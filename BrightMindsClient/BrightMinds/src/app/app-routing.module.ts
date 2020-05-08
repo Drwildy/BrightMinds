@@ -7,7 +7,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { CourselistComponent } from './components/courselist/courselist.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { StudentComponent } from './components/student/student.component';
-import { FindClassesComponent } from './find-classes/find-classes.component';
+//import { FindClassesComponent } from './components/find-classes.component';
 import { CourseregistrationComponent } from './components/courseregistration/courseregistration.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentcourseComponent } from './components/studentcourse/studentcourse.component';
@@ -50,10 +50,10 @@ const routes: Routes = [
     component: StudentComponent,
     path: "student"
   },
-  {
-    component: FindClassesComponent,
-    path: "find-classes"
-  },
+  // {
+  //   component: FindClassesComponent,
+  //   path: "find-classes"
+  // },
   {
     path: "courseregistration",
     component: CourseregistrationComponent
