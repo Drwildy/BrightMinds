@@ -1,0 +1,12 @@
+#jumbotron{
+    margin-top: 94px;
+    background-size: 100% 400px;
+    background-image: url("/assets/images/main.png") ;
+}
+
+#jumbotron>h1{
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: xx-large;
+    font-weight: bold;
+}

@@ -1,17 +1,25 @@
-<div id="tbar" class="fixed-top">
-    
+<!--<div id="tbar" class="fixed-top">   
     <div id="tbarOpt">
         <h1>Bright Minds</h1>
         <a routerLink="/index"><button class="btn btn-light">Home</button></a>
         <a [routerLink]="['/student']"><button class="btn btn-light">Profile</button></a>
         <a [routerLink]="['/login']"><button class="btn btn-light" (click)="logout()">Logout</button></a>     
         <a><i class="fas fa-sign-out-alt"></i></a>
-    </div> 
-    <router-outlet></router-outlet> 
-</div>
- <h3>Registor For Courses </h3>
-<div *ngFor="let course of listofcourse">
-    <app-studentcourse [courseinfo]="course">
-    </app-studentcourse>
-    
-</div>
+    </div> -->
+ 
+<app-tbar></app-tbar>
+<section>
+    <h1>Courses </h1>
+    <div id="coursesContainer" class="offset-1 bg-light-gray">
+     <div *ngFor="let course of listofcourse">
+         <div id="courseCard" class="card col-mb-3 col-lg-3">
+           <h5 class="card-header">{{ course.title }}</h5>
+           <div class="card-body">
+             <h5 class="card-title">Hours: {{course.hours}}  Price: {{course.price | currency}}</h5>
+             <p class="card-text">{{course.description}}</p>
+             <button (click)="courseRegistration(course)" class="btn btn-primary">Register </button>
+           </div>
+         </div>
+     </div>
+   </div>
+  </section> 

@@ -6,12 +6,15 @@ h1{
     text-shadow: 3px 3px 2px midnightblue;
 }
 
-#coursesContainer{
+#adminInstructor{
     margin-top: 6px;
     padding: 8px;
+    box-shadow: 3px 3px 20px lightslategrey;
 }
 
-#courseCard{
-    float: left;
-    margin: 20px;
-}
+hr{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    color: blue;
+    width: 100%;
+} 

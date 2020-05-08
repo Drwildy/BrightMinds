@@ -8,10 +8,9 @@ h1{
 
 #coursesContainer{
     margin-top: 6px;
-    padding: 8px;
+    padding: 10px;
 }
 
-#courseCard{
-    float: left;
-    margin: 20px;
+#coursesContainer>table{
+    width: 96%;
 }

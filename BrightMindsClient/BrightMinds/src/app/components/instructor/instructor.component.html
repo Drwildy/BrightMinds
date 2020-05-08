@@ -1,12 +1,8 @@
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>{firstName}'s' Home Page</title>
-</head>
+<app-tbar></app-tbar>
 <body>
+    <h1>Add Course</h1>
     <form class="border border-light p-5" (ngSubmit)="registerCourse()" #courseForm="ngForm">
         <div class="container">
-            <h1 class="mb-4 text-center">Add Course</h1>
             <h4 class="mb-4 text-center">Please Enter your course information here...</h4>
             <p>Name of Course:</p>
             <input type="text" id="courseFormTitle" class="form-control mb-4" placeholder="Title" [(ngModel)]="title" name="usernameInput" #titleInput="ngModel">
@@ -24,10 +20,9 @@
         </div>
     </form>
 
-
+    <h1>Your Information</h1>
     <form class="border border-light p-5" (ngSubmit)="editInfo()" #courseForm="ngForm">
         <div class="container">
-            <h1 class="mb-4 text-center">Your Information</h1>
             <h4 class="mb-4 text-center">Edit your information Here:</h4>
             <p>First Name: {{firstName}}</p>
             <input type="text" id="infoFormFirstName" class="form-control mb-4" placeholder="First Name" [(ngModel)]="editfirstName" name="firstNameInput" #firstNameInput="ngModel">
@@ -49,7 +44,7 @@
         </div>
     </form>
 
-    <h1>Courses </h1>
+    <h1>Courses</h1>
     <div id="coursesContainer" class="offset-1 bg-light-gray">
      <div *ngFor="let course of courseList">
         <div id="courseCard" class="card col-mb-3 col-lg-3">
@@ -66,5 +61,5 @@
    </div>
 
 </body>
-</html>
+
 
